@@ -1,0 +1,37 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "Volodya",
+    "children" : [ {
+      "name" : "2380@Volodya.main(1)",
+      "children" : [ {
+        "name" : "test",
+        "uid" : "1f66295f3ec8b6d",
+        "parentUid" : "efdf0c60232322767ceb85571b24b05e",
+        "status" : "broken",
+        "time" : {
+          "start" : 1527541979455,
+          "stop" : 1527541984175,
+          "duration" : 4720
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test",
+        "uid" : "a408de8fa81a3b6c",
+        "parentUid" : "efdf0c60232322767ceb85571b24b05e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1527541971112,
+          "stop" : 1527541971119,
+          "duration" : 7
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "efdf0c60232322767ceb85571b24b05e"
+    } ],
+    "uid" : "c7c7c4b815ec7e89699a8e82d0a4f7b8"
+  } ]
+}

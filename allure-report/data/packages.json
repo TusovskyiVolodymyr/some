@@ -1,0 +1,37 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "LoginTest",
+    "children" : [ {
+      "name" : "test",
+      "uid" : "a408de8fa81a3b6c",
+      "parentUid" : "7cbde4e1492086c9f8631b2d4e369dc0",
+      "status" : "passed",
+      "time" : {
+        "start" : 1527541971112,
+        "stop" : 1527541971119,
+        "duration" : 7
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "7cbde4e1492086c9f8631b2d4e369dc0"
+  }, {
+    "name" : "SmokeTest",
+    "children" : [ {
+      "name" : "test",
+      "uid" : "1f66295f3ec8b6d",
+      "parentUid" : "57390b197da0e64a3ed3d0018c541730",
+      "status" : "broken",
+      "time" : {
+        "start" : 1527541979455,
+        "stop" : 1527541984175,
+        "duration" : 4720
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "57390b197da0e64a3ed3d0018c541730"
+  } ]
+}

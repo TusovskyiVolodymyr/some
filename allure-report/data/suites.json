@@ -1,0 +1,45 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "Surefire suite",
+    "children" : [ {
+      "name" : "Surefire test",
+      "children" : [ {
+        "name" : "LoginTest",
+        "children" : [ {
+          "name" : "test",
+          "uid" : "a408de8fa81a3b6c",
+          "parentUid" : "477ea64dcfd009aeb68365f7cd02a192",
+          "status" : "passed",
+          "time" : {
+            "start" : 1527541971112,
+            "stop" : 1527541971119,
+            "duration" : 7
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "477ea64dcfd009aeb68365f7cd02a192"
+      }, {
+        "name" : "SmokeTest",
+        "children" : [ {
+          "name" : "test",
+          "uid" : "1f66295f3ec8b6d",
+          "parentUid" : "e7f1f26b91406ede25e2ca85e72735fd",
+          "status" : "broken",
+          "time" : {
+            "start" : 1527541979455,
+            "stop" : 1527541984175,
+            "duration" : 4720
+          },
+          "flaky" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "e7f1f26b91406ede25e2ca85e72735fd"
+      } ],
+      "uid" : "1fcb2e6ec8e5b5e8a1f2a70b87c80b24"
+    } ],
+    "uid" : "940a09faf31371a51747026c9d178f0a"
+  } ]
+}
