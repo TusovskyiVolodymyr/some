@@ -1,5 +1,9 @@
 package pageObjects;
 
+import com.sun.corba.se.impl.encoding.WrapperInputStream;
+import driver.BrowserType;
+import driver.WebDriverManager;
+import org.omg.CORBA.portable.InputStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +24,7 @@ public class LoginPO extends BasePO {
     private WebElement submit;
 
     public LoginPO act_getLoginUrl() {
-        driver.get(utill.getBaseUrl());
+        WebDriverManager.getDriver().get(utill.getBaseUrl());
         return this;
     }
 
@@ -41,7 +45,7 @@ public class LoginPO extends BasePO {
 
     public LoginPO ver_Loged(String user) {
         By by = By.xpath("//*[@data-click='profile_icon']//span[contains(text(),'" + user + "')]");
-        WebElement webElement = driver.findElement(by);
+        WebElement webElement = WebDriverManager.getDriver().findElement(by);
         ver_ElementIsPresent(webElement);
         return this;
     }

@@ -13,15 +13,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
-    private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
     private DriverFactory() {
     }
 
-    public static WebDriver getWebDriver(BrowserType browserType) {
-        if (webDriverThreadLocal.get() != null) {
-            return webDriverThreadLocal.get();
-        }
+    public  static WebDriver getWebDriver(BrowserType browserType) {
 
         WebDriver instance = null;
         switch (browserType) {
@@ -66,18 +62,8 @@ public class DriverFactory {
                 break;
             }
         }
-        instance.manage().window().maximize();
-        instance.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        instance.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
-        webDriverThreadLocal.set(instance);
-        return webDriverThreadLocal.get();
-    }
-
-    public static void quit() {
-        try {
-            webDriverThreadLocal.get().quit();
-        } finally {
-            webDriverThreadLocal.remove();
-        }
+        instance.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
+        instance.manage().timeouts().pageLoadTimeout(45,TimeUnit.SECONDS);
+        return instance;
     }
 }

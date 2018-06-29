@@ -3,7 +3,7 @@ package bussinesObjects;
 import pageObjects.LoginPO;
 import utils.Injector;
 
-public class LoginBO extends BaseBO{
+public class LoginBO extends BaseBO {
 
     @Injector
     private LoginPO loginPO;
@@ -16,7 +16,7 @@ public class LoginBO extends BaseBO{
         return this;
     }
 
-    public LoginBO getLoginUrl(){
+    public LoginBO getLoginUrl() {
         loginPO.act_getLoginUrl();
         return this;
     }

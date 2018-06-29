@@ -13,6 +13,7 @@ public class SearchPO extends HeaderPO {
     private Button searchButton;
 
     public SearchPO act_typeSearchWorld(String text) {
+        waitELementToBePresent(searchInput,10);
         searchInput.clear();
         typeText(searchInput, text);
         return this;
