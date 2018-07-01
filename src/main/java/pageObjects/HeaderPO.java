@@ -2,6 +2,7 @@ package pageObjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.WaitManager;
 
 import java.util.Objects;
 
@@ -76,7 +77,7 @@ public class HeaderPO extends BasePO {
 
 
     public boolean isNewNotification() {
-        waitELementToBeNotPresent(notificationCount,5);
+        WaitManager.waitElementToBeNotPresent(notificationCount);
         return !Objects.equals(getText(notificationCount), "");
     }
 }

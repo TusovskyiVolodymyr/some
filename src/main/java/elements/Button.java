@@ -1,6 +1,7 @@
 package elements;
 
 import org.openqa.selenium.WebElement;
+import utils.WaitManager;
 
 public class Button extends BaseElement {
 
@@ -8,9 +9,12 @@ public class Button extends BaseElement {
         super(webElement);
     }
 
-    public void clicko(){
+    public void clicko() {
         System.out.println("insile Button");
-       click();
+        WaitManager.waitUntillBeClickable(webElement);
+        if (isClickable()) {
+            click();
+        }
     }
 
     public boolean isClickable() {

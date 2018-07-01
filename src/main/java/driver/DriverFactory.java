@@ -1,5 +1,6 @@
 package driver;
 
+import consts.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,24 +10,36 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.WebDriverProperties;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
 
-    private DriverFactory() {
+    private static WebDriverProperties webDriverProperties;
+
+    static {
+        try {
+            webDriverProperties = new WebDriverProperties();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public  static WebDriver getWebDriver(BrowserType browserType) {
+    private DriverFactory() throws IOException {
+    }
+
+    public static WebDriver getWebDriver(BrowserType browserType) {
 
         WebDriver instance = null;
         switch (browserType) {
             case CHROME: {
-                    System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver.exe");
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--disable-notifications");
-                    chromeOptions.addArguments("--disable-infobars");
-                    instance = new ChromeDriver(chromeOptions);
+                System.setProperty("webdriver.chrome.driver", webDriverProperties.getProperty("chrome.exe"));
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--disable-notifications");
+                chromeOptions.addArguments("--disable-infobars");
+                instance = new ChromeDriver(chromeOptions);
                 break;
             }
             case IE: {
@@ -62,8 +75,8 @@ public class DriverFactory {
                 break;
             }
         }
-        instance.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
-        instance.manage().timeouts().pageLoadTimeout(45,TimeUnit.SECONDS);
+        instance.manage().timeouts().implicitlyWait(Constants.IMPLICIT_WAIT, TimeUnit.SECONDS);
+        instance.manage().timeouts().pageLoadTimeout(Constants.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
         return instance;
     }
 }

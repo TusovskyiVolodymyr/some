@@ -1,5 +1,7 @@
 package pageObjects;
 
+import static utils.WaitManager.*;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -17,7 +19,7 @@ public class HomePO extends BasePO {
     }
 
     public HomePO act_clickUploadPhoto() {
-        waitELementToBePresent(uploadPhoto, 5);
+        waitElementToBePresent(uploadPhoto, 5);
         click(uploadPhoto);
         return this;
     }
