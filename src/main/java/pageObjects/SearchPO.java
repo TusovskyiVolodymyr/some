@@ -16,7 +16,7 @@ public class SearchPO extends HeaderPO {
 
     public SearchPO act_typeSearchWorld(String text) {
         waitElementToBePresent(searchInput, 10);
-        searchInput.clear();
+        waitUntilJSLoad();
         typeText(searchInput, text);
         return this;
     }

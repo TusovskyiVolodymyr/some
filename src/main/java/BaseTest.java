@@ -23,7 +23,7 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void login(Method method) {
-        WebDriverManager.setDriver(BrowserType.CHROME);
+        WebDriverManager.setDriver(BrowserType.FIREFOX);
         System.out.println("Processing method: " + method.getName());
         if (method.isAnnotationPresent(Credentials.class)) {
             String[] strings = method.getAnnotation(Credentials.class).creds();

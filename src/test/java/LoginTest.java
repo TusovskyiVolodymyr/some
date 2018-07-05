@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
 
         searchPO.act_typeSearchWorld("Chandler Bing")
                 .act_clickSearchButton();
-        Publisher.publishEvent("CLID");
+//        Publisher.publishEvent("CLID");
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 

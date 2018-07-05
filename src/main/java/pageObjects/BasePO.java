@@ -32,27 +32,30 @@ public abstract class BasePO {
     }
 
     protected BasePO click(WebElement webElement) {
+        WaitManager.waitUntilJSLoad();
         WaitManager.waitUntillBeClickable(webElement);
 //        String color = highlightElement(webElement);
         webElement.click();
+        WaitManager.waitUntilJSLoad();
 //        unHighlightElement(webElement, color);
         log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
         return this;
     }
 
     protected BasePO typeText(WebElement webElement, String text) {
-
 //        String s = highlightElement(webElement);
+        WaitManager.waitUntilJSLoad();
         webElement.sendKeys(text);
+        WaitManager.waitUntilJSLoad();
 //        unHighlightElement(webElement, s);
         log.info(String.format("In element with locator: %s was typed: %s", StringUtils.getXpathOfWebElement(webElement), text));
         return this;
     }
 
     protected String getText(WebElement webElement) {
-        String s = highlightElement(webElement);
+//        String s = highlightElement(webElement);
         String text = webElement.getText();
-        unHighlightElement(webElement, s);
+//        unHighlightElement(webElement, s);
         log.info(String.format("Getting text from element with locator: %s text: %s", StringUtils.getXpathOfWebElement(webElement), webElement.getText()));
         return text;
     }

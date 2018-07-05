@@ -5,11 +5,13 @@ import driver.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
+import java.util.function.Predicate;
 
 public class WaitManager {
     private final static Logger log = LogManager.getLogger();
@@ -19,7 +21,8 @@ public class WaitManager {
         Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(seconds))
                 .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NotFoundException.class, StaleElementReferenceException.class);
+                .ignoring(NotFoundException.class)
+                .ignoring(StaleElementReferenceException.class);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(StringUtils.getXpathOfWebElement(webElement))));
     }
 
@@ -58,11 +61,20 @@ public class WaitManager {
         Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(seconds))
                 .pollingEvery(Duration.ofMillis(500))
-                .ignoring(NotFoundException.class, StaleElementReferenceException.class);
+                .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     public static void waitUntillBeClickable(WebElement webElement) {
         waitUntilBeClickable(webElement, Constants.BASE_TIMEOUT);
+    }
+
+    public static void waitUntilJSLoad() {
+        Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
+        wait.until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 }
