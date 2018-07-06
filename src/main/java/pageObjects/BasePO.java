@@ -2,6 +2,7 @@ package pageObjects;
 
 import driver.WebDriverManager;
 import elements.CustomFieldDecorator;
+import elements.IElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -39,6 +40,17 @@ public abstract class BasePO {
         WaitManager.waitUntilJSLoad();
 //        unHighlightElement(webElement, color);
         log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
+        return this;
+    }
+
+    protected BasePO click(IElement webElement) {
+//        WaitManager.waitUntilJSLoad();
+//        WaitManager.waitUntillBeClickable(webElement);
+//        String color = highlightElement(webElement);
+        webElement.click();
+//        WaitManager.waitUntilJSLoad();
+//        unHighlightElement(webElement, color);
+//        log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
         return this;
     }
 
