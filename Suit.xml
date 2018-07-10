@@ -1,12 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestAll">
     <!--<listeners>-->
-        <!--<listener class-name="org.uncommons.reportng.HTMLReporter" />-->
-        <!--<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />-->
+    <!--<listener class-name="listener.DriverListener" />-->
     <!--</listeners>-->
-    <test name="order" parallel="methods" thread-count="4">
-    <classes>
-        <class name="LoginTest" />
-    </classes>
-</test>
+
+    <parameter name="browser" value="chrome"/>
+
+    <test name="order" parallel="methods" thread-count="1">
+        <classes>
+            <class name="PostTest"/>
+        </classes>
+    </test>
+    <test name="order2" parallel="methods" thread-count="2">
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
 </suite>

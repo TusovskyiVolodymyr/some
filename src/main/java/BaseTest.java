@@ -5,10 +5,7 @@ import driver.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import utils.CsvUtils;
 import utils.Instance;
 
@@ -21,9 +18,10 @@ public abstract class BaseTest {
 
     private LoginBO loginBO;
 
+    @Parameters(value = "browser")
     @BeforeMethod
-    public void login(Method method) {
-        WebDriverManager.setDriver(BrowserType.FIREFOX);
+    public void login(Method method, String browserType) {
+        WebDriverManager.setDriver(browserType);
         System.out.println("Processing method: " + method.getName());
         if (method.isAnnotationPresent(Credentials.class)) {
             String[] strings = method.getAnnotation(Credentials.class).creds();

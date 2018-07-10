@@ -16,11 +16,16 @@ public class LoginTest extends BaseTest {
     @Injector
     private HeaderPO headerPO;
     @Injector
-    private HomePO homePO;
+    private UserProfilePO homePO;
     @Injector
     private SearchPO searchPO;
     @Injector
     private SearchResultsPO searchResultsPO;
+
+    private EventPublisher eventPublisher;
+
+    private EventListener eventListener;
+    private Event event;
 
 
     @Credentials(creds = {"testLogin1", "testPassword1"})
@@ -28,9 +33,8 @@ public class LoginTest extends BaseTest {
     public void test() throws InterruptedException {
         System.out.println("current thread: "+Thread.currentThread().getName());
 
-        searchPO.act_typeSearchWorld("Chandler Bing")
-                .act_clickSearchButton();
-//        Publisher.publishEvent("CLID");
+        searchPO.act_typeSearchWorld("Chandler Bing");
+        searchPO  .act_clickSearchButton();
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
@@ -43,8 +47,12 @@ public class LoginTest extends BaseTest {
 //        Thread.sleep(7000);
 //        headerPO.act_clickUserProfileIcon();
 //        Assert.assertFalse(headerPO.isNewNotification());
+//        System.out.println(publisher.getMessage());
+
         searchPO.act_typeSearchWorld("Chandler Bing");
     }
+
+
     @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test(priority = 2)
     public void test2() throws InterruptedException {

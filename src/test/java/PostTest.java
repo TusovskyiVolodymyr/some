@@ -1,9 +1,9 @@
 import bussinesObjects.LoginBO;
+import bussinesObjects.PostBO;
 import org.testng.annotations.Test;
 import pageObjects.HeaderPO;
 import pageObjects.SearchPO;
 import pageObjects.SearchResultsPO;
-import pageObjects.UserProfilePO;
 import utils.Injector;
 
 public class PostTest extends BaseTest {
@@ -12,13 +12,14 @@ public class PostTest extends BaseTest {
     private LoginBO loginBO;
     @Injector
     private HeaderPO headerPO;
-    @Injector
-    private UserProfilePO userProfilePO;
+    //    @Injector
+//    private UserProfileBO userProfileBO;
     @Injector
     private SearchPO searchPO;
     @Injector
     private SearchResultsPO searchResultsPO;
-
+    @Injector
+    private PostBO postBO;
 
 
     @Credentials(creds = {"testLogin1", "testPassword1"})
@@ -26,9 +27,7 @@ public class PostTest extends BaseTest {
     public void test() throws InterruptedException {
         System.out.println("current thread: " + Thread.currentThread().getName());
 
-       headerPO.act_clickUserProfileIcon();
-       userProfilePO.act_typePostText("Hello Word!")
-       .act_clickPostButton();
-       Thread.sleep(5000);
+        headerPO.act_clickUserProfileIcon();
+        postBO.act_createPostWithText("Hello all!");
     }
 }

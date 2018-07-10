@@ -6,7 +6,7 @@ public class WebDriverManager {
 
     private static ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
-    public synchronized static void setDriver(BrowserType browserType) {
+    public synchronized static void setDriver(String browserType) {
         if (getDriver() == null) {
             threadLocal = ThreadLocal.withInitial(() -> DriverFactory.getWebDriver(browserType));
         }

@@ -25,9 +25,4 @@ public class WebDriverProperties {
             return properties.getProperty(name);
         } else throw new RuntimeException("No such key in file: " + name);
     }
-
-    public static void main(String[] args) throws IOException {
-        WebDriverProperties properties = new WebDriverProperties();
-        System.out.println(properties.getProperty("chrome.exe"));
-    }
 }
