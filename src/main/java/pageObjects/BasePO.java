@@ -1,5 +1,6 @@
 package pageObjects;
 
+import annotations.Instance;
 import driver.WebDriverManager;
 import elements.CustomFieldDecorator;
 import elements.IElement;
@@ -9,7 +10,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import utils.Instance;
 import utils.PropertiesUtill;
 import utils.StringUtils;
 import utils.WaitManager;
@@ -35,39 +35,40 @@ public abstract class BasePO {
     protected BasePO click(WebElement webElement) {
         WaitManager.waitUntilJSLoad();
         WaitManager.waitUntillBeClickable(webElement);
-//        String color = highlightElement(webElement);
+        String color = highlightElement(webElement);
         webElement.click();
         WaitManager.waitUntilJSLoad();
-//        unHighlightElement(webElement, color);
         log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
         return this;
     }
 
     protected BasePO click(IElement webElement) {
-//        WaitManager.waitUntilJSLoad();
+        WaitManager.waitUntilJSLoad();
 //        WaitManager.waitUntillBeClickable(webElement);
 //        String color = highlightElement(webElement);
         webElement.click();
+        System.out.println("element Wrapper: " + webElement);
 //        WaitManager.waitUntilJSLoad();
 //        unHighlightElement(webElement, color);
-//        log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
+        log.info(String.format("Element with locator: %s was clicked!", webElement.getXpath()));
         return this;
     }
 
     protected BasePO typeText(WebElement webElement, String text) {
-//        String s = highlightElement(webElement);
         WaitManager.waitUntilJSLoad();
+        WaitManager.waitElementToBeVisible(webElement);
+        String s = highlightElement(webElement);
         webElement.sendKeys(text);
         WaitManager.waitUntilJSLoad();
-//        unHighlightElement(webElement, s);
         log.info(String.format("In element with locator: %s was typed: %s", StringUtils.getXpathOfWebElement(webElement), text));
         return this;
     }
 
     protected String getText(WebElement webElement) {
-//        String s = highlightElement(webElement);
+        WaitManager.waitUntilJSLoad();
+        WaitManager.waitElementToBeVisible(webElement);
+        String s = highlightElement(webElement);
         String text = webElement.getText();
-//        unHighlightElement(webElement, s);
         log.info(String.format("Getting text from element with locator: %s text: %s", StringUtils.getXpathOfWebElement(webElement), webElement.getText()));
         return text;
     }
@@ -75,16 +76,15 @@ public abstract class BasePO {
     protected BasePO ver_textPresent(WebElement element, String text) {
         String color = highlightElement(element);
         Assert.assertEquals(element.getText(), (text));
-        unHighlightElement(element, color);
         return this;
     }
 
     protected BasePO ver_ElementIsPresent(WebElement webElement) {
+        WaitManager.waitUntilJSLoad();
         WaitManager.waitElementToBePresent(webElement);
-//        String c = highlightElement(webElement);
+        String c = highlightElement(webElement);
         log.info("Verifying element with locator: " + StringUtils.getXpathOfWebElement(webElement));
-        Assert.assertTrue(webElement.isDisplayed());
-//        unHighlightElement(webElement, c);
+        Assert.assertTrue(webElement != null);
         return this;
     }
 

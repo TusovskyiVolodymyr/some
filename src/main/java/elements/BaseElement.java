@@ -1,6 +1,7 @@
 package elements;
 
 import org.openqa.selenium.*;
+import utils.StringUtils;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class BaseElement implements IElement {
     @Override
     public void click() {
         System.out.println("inside wraper");
-        webElement.click();
+        if (isEnabled()) {
+            webElement.click();
+        }
     }
 
     @Override
@@ -96,5 +99,10 @@ public class BaseElement implements IElement {
     @Override
     public String getCssValue(String s) {
         return webElement.getCssValue(s);
+    }
+
+    @Override
+    public String getXpath() {
+        return StringUtils.getXpathOfWebElement(webElement);
     }
 }

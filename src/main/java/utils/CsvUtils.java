@@ -17,7 +17,6 @@ public class CsvUtils {
             for (String[] record : records) {
                 map.put(record[0], record[1]);
             }
-            System.out.println(map);
             return map;
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,7 +26,7 @@ public class CsvUtils {
 
     public static String getParam(String param) {
         Map<String, String> map = getDataFromCsv("");
-        if (map != null && map.containsKey(param) == true) {
+        if (map != null && map.containsKey(param)) {
             return map.get(param);
         } else throw new NoSuchUserParametrException("No such param in .csv file " + param);
     }

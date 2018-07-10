@@ -1,11 +1,11 @@
+import annotations.Credentials;
+import annotations.Injector;
 import bussinesObjects.LoginBO;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pageObjects.*;
-import utils.CsvUtils;
-import utils.Injector;
-
-import java.lang.reflect.Method;
+import pageObjects.HeaderPO;
+import pageObjects.SearchPO;
+import pageObjects.SearchResultsPO;
+import pageObjects.UserProfilePO;
 
 import static pageObjects.SearchResultsPO.SearchType;
 

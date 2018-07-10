@@ -1,7 +1,7 @@
 package bussinesObjects;
 
+import annotations.Injector;
 import pageObjects.LoginPO;
-import utils.Injector;
 
 public class LoginBO extends BaseBO {
 
@@ -13,11 +13,6 @@ public class LoginBO extends BaseBO {
         loginPO.act_typeLogin(login);
         loginPO.act_typePassword(password);
         loginPO.act_clickLoginButton();
-        return this;
-    }
-
-    public LoginBO getLoginUrl() {
-        loginPO.act_getLoginUrl();
         return this;
     }
 }

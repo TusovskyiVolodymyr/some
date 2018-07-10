@@ -1,6 +1,6 @@
 package bussinesObjects;
 
-import utils.Instance;
+import annotations.Instance;
 
 public abstract class BaseBO {
 

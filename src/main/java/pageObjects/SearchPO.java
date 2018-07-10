@@ -1,7 +1,5 @@
 package pageObjects;
 
-import static utils.WaitManager.*;
-
 import elements.Button;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,8 +13,6 @@ public class SearchPO extends HeaderPO {
     private Button searchButton;
 
     public SearchPO act_typeSearchWorld(String text) {
-        waitElementToBePresent(searchInput, 10);
-        waitUntilJSLoad();
         typeText(searchInput, text);
         return this;
     }

@@ -1,10 +1,11 @@
+import annotations.Credentials;
+import annotations.Injector;
 import bussinesObjects.LoginBO;
 import bussinesObjects.PostBO;
 import org.testng.annotations.Test;
 import pageObjects.HeaderPO;
 import pageObjects.SearchPO;
 import pageObjects.SearchResultsPO;
-import utils.Injector;
 
 public class PostTest extends BaseTest {
 

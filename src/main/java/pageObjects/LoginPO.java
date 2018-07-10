@@ -1,16 +1,9 @@
 package pageObjects;
 
-import com.sun.corba.se.impl.encoding.WrapperInputStream;
-import driver.BrowserType;
 import driver.WebDriverManager;
-import org.omg.CORBA.portable.InputStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-import utils.PropertiesUtill;
-
-import java.io.IOException;
 
 public class LoginPO extends BasePO {
 
