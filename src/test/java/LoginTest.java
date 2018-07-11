@@ -22,12 +22,6 @@ public class LoginTest extends BaseTest {
     @Injector
     private SearchResultsPO searchResultsPO;
 
-    private EventPublisher eventPublisher;
-
-    private EventListener eventListener;
-    private Event event;
-
-
     @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test
     public void test() throws InterruptedException {
@@ -41,42 +35,23 @@ public class LoginTest extends BaseTest {
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test()
     public void gffkjggf() throws InterruptedException {
-        System.out.println("current thread: "+Thread.currentThread().getName());
-//        Publisher.waitForEvent("CLID");
-        System.out.println("after");
-//        Thread.sleep(7000);
-//        headerPO.act_clickUserProfileIcon();
-//        Assert.assertFalse(headerPO.isNewNotification());
-//        System.out.println(publisher.getMessage());
-
-        searchPO.act_typeSearchWorld("Chandler Bing");
+            searchPO.act_typeSearchWorld("Chandler Bing")
+                    .ver_textTyped("Chandler Bing");
     }
 
 
     @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test(priority = 2)
     public void test2() throws InterruptedException {
-        System.out.println("current thread: "+Thread.currentThread().getName());
-//        String user = CsvUtils.getParam("user1FullName").split(" ")[0];
-//
-//        loginPO.ver_Loged(user);
-//        headerPO.act_clickUserProfileIcon();
-//        Assert.assertFalse(headerPO.isNewNotification());
         searchPO.act_typeSearchWorld("Chandler Bing")
                 .act_clickSearchButton();
-//        Publisher.publishEvent("CLID");
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test(priority = 2)
     public void gffkjggf2() throws InterruptedException {
-        System.out.println("current thread: "+Thread.currentThread().getName());
-//        Publisher.waitForEvent("CLID");
-        System.out.println("after");
-//        Thread.sleep(7000);
-//        headerPO.act_clickUserProfileIcon();
-//        Assert.assertFalse(headerPO.isNewNotification());
-        searchPO.act_typeSearchWorld("Chandler Bing");
+        searchPO.act_typeSearchWorld("Chandler Bing")
+        .ver_textTyped("Chandler Bing");
     }
 }

@@ -30,4 +30,10 @@ public class Verify {
         Assert.assertEquals(element.getText(), text, "text");
         return true;
     }
+
+    public static boolean isTrue(boolean isTrue) {
+        Assert.assertTrue(isTrue, "condition is true");
+        return true;
+    }
+
 }

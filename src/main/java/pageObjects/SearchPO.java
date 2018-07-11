@@ -3,6 +3,7 @@ package pageObjects;
 import elements.Button;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.Verify;
 
 public class SearchPO extends HeaderPO {
 
@@ -18,8 +19,12 @@ public class SearchPO extends HeaderPO {
     }
 
     public SearchPO act_clickSearchButton() {
-        searchButton.clicko();
-//        click(searchButton);
+        searchButton.clickOn();
+        return this;
+    }
+
+    public SearchPO ver_textTyped(String text) {
+        Verify.isTrue(getInputValue(searchInput).equals(text));
         return this;
     }
 }

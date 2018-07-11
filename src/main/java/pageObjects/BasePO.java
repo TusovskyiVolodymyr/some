@@ -73,6 +73,16 @@ public abstract class BasePO {
         return text;
     }
 
+    protected String getInputValue(WebElement webElement) {
+        WaitManager.waitElementToBeVisible(webElement);
+        WaitManager.waitUntilJSLoad();
+        String text = webElement.getAttribute("value");
+        log.info(String.format("Getting text from input with locator: %s text: %s", StringUtils.getXpathOfWebElement(webElement), text));
+        WaitManager.waitUntilJSLoad();
+        return text;
+    }
+
+
     protected BasePO ver_textPresent(WebElement element, String text) {
         String color = highlightElement(element);
         Assert.assertEquals(element.getText(), (text));

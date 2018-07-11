@@ -9,8 +9,7 @@ public class Button extends BaseElement {
         super(webElement);
     }
 
-    public void clicko() {
-        System.out.println("insile Button");
+    public void clickOn() {
         WaitManager.waitUntillBeClickable(webElement);
         if (isClickable()) {
             click();
