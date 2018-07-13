@@ -13,7 +13,7 @@
     </test>
     <test name="order2" parallel="methods" thread-count="2">
         <classes>
-            <class name="LoginTest"/>
+            <class name="SearchTest"/>
         </classes>
     </test>
 </suite>

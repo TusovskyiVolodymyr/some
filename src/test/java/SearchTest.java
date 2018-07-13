@@ -9,7 +9,7 @@ import pageObjects.UserProfilePO;
 
 import static pageObjects.SearchResultsPO.SearchType;
 
-public class LoginTest extends BaseTest {
+public class SearchTest extends BaseTest {
 
     @Injector
     private LoginBO loginBO;
@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest {
 
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test()
-    public void gffkjggf() throws InterruptedException {
+    public void test3() throws InterruptedException {
             searchPO.act_typeSearchWorld("Chandler Bing")
                     .ver_textTyped("Chandler Bing");
     }
@@ -50,7 +50,7 @@ public class LoginTest extends BaseTest {
 
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test(priority = 2)
-    public void gffkjggf2() throws InterruptedException {
+    public void test4() throws InterruptedException {
         searchPO.act_typeSearchWorld("Chandler Bing")
         .ver_textTyped("Chandler Bing");
     }
