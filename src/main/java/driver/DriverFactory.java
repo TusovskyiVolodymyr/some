@@ -45,6 +45,7 @@ public class DriverFactory {
                 instance = new FirefoxDriver(ffprofile);
                 break;
             }
+            // add default variant
         }
         instance.manage().timeouts().implicitlyWait(Constants.IMPLICIT_WAIT, TimeUnit.SECONDS);
         instance.manage().timeouts().pageLoadTimeout(Constants.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);

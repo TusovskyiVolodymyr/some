@@ -18,5 +18,6 @@ public class PropertiesUtill {
     public String getBaseUrl(){
         return properties.getProperty("base.url");
     }
+    // if param
 
 }

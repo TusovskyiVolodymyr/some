@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class StringUtils {
 
     public static String getXpathOfWebElement(WebElement webElement) {
+        // name
         String locator = null;
         Pattern patternXpath = Pattern.compile("(xpath:.(.*))|(elector:.(.*))");
         Matcher matcher = patternXpath.matcher(webElement.toString());

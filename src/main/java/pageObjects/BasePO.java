@@ -28,6 +28,7 @@ public abstract class BasePO {
             utill = new PropertiesUtill();
         } catch (IOException e) {
             e.printStackTrace();
+            //to do exception handling
         }
         Instance.create(this);
     }
