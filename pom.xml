@@ -53,7 +53,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Xmx1024m -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>Suit.xml</suiteXmlFile>
@@ -82,12 +82,13 @@
     </reporting>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>2.0-BETA14</version>
-            <scope>test</scope>
+            <version>2.6.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
@@ -159,6 +160,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>5.0.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.0-BETA19</version>
         </dependency>
 
     </dependencies>
