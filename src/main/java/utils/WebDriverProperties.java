@@ -16,10 +16,6 @@ public class WebDriverProperties {
         }
     }
 
-    public String getBaseUrl() {
-        return properties.getProperty("chrome.exe");
-    }
-
     public String getProperty(String name) {
         if (!properties.isEmpty() && properties.containsKey(name)) {
             return properties.getProperty(name);

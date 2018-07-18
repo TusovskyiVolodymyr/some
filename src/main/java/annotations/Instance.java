@@ -20,7 +20,7 @@ public class Instance {
                     field.set(o, obj);
                     log.info(String.format("Instance of: %s was successfully created!", o.getClass().getName()));
                 } catch (InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
             }
         }
