@@ -1,9 +1,15 @@
 package utils;
 
+import io.qameta.allure.Step;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class Verify {
+
+    private final static Logger log = LogManager.getLogger(Verify.class);
+
     public static boolean elementPresent(WebElement webElement) {
         boolean isPresent = webElement != null;
         Assert.assertTrue(isPresent, "Element with locator: " + StringUtils.getXpathOfWebElement(webElement) + "is present!");
@@ -34,6 +40,11 @@ public class Verify {
     public static boolean isTrue(boolean isTrue) {
         Assert.assertTrue(isTrue, "condition is true");
         return true;
+    }
+
+    @Step("{0}")
+    public static void info(String message) {
+        log.info(message);
     }
 
 }

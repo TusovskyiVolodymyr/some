@@ -14,11 +14,11 @@ import utils.StringUtils;
 import utils.WaitManager;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public abstract class BasePO {
 
-    private static final LoggerWrapper log = LoggerWrapper.getLogger(BasePO.class);
-//
+    private static LoggerWrapper log = LoggerWrapper.getLogger(BasePO.class);
     protected PropertiesUtill utill;
 
     protected BasePO() {
@@ -26,8 +26,7 @@ public abstract class BasePO {
         try {
             utill = new PropertiesUtill();
         } catch (IOException e) {
-            e.printStackTrace();
-            //to do exception handling
+            log.error(Arrays.toString(e.getStackTrace()));
         }
         Instance.create(this);
     }
@@ -94,7 +93,7 @@ public abstract class BasePO {
         WaitManager.waitElementToBePresent(webElement);
         String c = highlightElement(webElement);
         log.info("Verifying element with locator: " + StringUtils.getXpathOfWebElement(webElement));
-        Assert.assertNotNull(webElement);
+        Assert.assertTrue(webElement != null);
         return this;
     }
 

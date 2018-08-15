@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.Wait;
 import java.time.Duration;
 
 public class WaitManager {
-//    private final static Logger log = LogManager.getLogger();
-private static final LoggerWrapper log = LoggerWrapper.getLogger(WaitManager.class);
+
+    private final static LoggerWrapper log = LoggerWrapper.getLogger(WaitManager.class);
 
     public static void waitElementToBePresent(WebElement webElement, int seconds) {
         log.info(String.format("Waiting for element with such locator: %s to be present in %d seconds", StringUtils.getXpathOfWebElement(webElement), seconds));

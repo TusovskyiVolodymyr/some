@@ -2,45 +2,43 @@ package listener;
 
 import driver.WebDriverManager;
 import io.qameta.allure.Attachment;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 public class TestListener implements ITestListener {
-    private final static Logger log = LogManager.getLogger();
+    private final static Logger log = LogManager.getLogger(TestListener.class);
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+//        Appender.fileAppender(iTestResult.getMethod().getMethodName()+iTestResult.getTestClass().getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
+        attachlogFie(iTestResult);
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        log.info("Failure");
+        log.error("Failure", iTestResult.getThrowable());
         attachScreenshot();
-//        File scrFile = ((TakesScreenshot) WebDriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
-//        InputStream inputStream = null;
-//        try {
-//            inputStream = new FileInputStream(scrFile);
-//        Files.copyFile(inputStream, new File("errorScreenshots\\" + iTestResult.getName() + "-"
-//                + Arrays.toString(iTestResult.getParameters()) +  ".jpg"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        attachlogFie(iTestResult);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-
+        log.error("Failure", iTestResult.getThrowable());
+        attachScreenshot();
+        attachlogFie(iTestResult);
     }
 
     @Override
@@ -59,7 +57,22 @@ public class TestListener implements ITestListener {
     }
 
     @Attachment(type = "image/png")
-    public byte[] attachScreenshot(){
+    private byte[] attachScreenshot() {
+        log.warn("Attaching screen shot...");
         return ((TakesScreenshot) WebDriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(type = "text/plain")
+    private byte[] attachlogFie(ITestResult iTestResult) {
+        byte[] array = null;
+        try {
+            array = Files.readAllBytes(new File("logs\\" + iTestResult.getMethod().getMethodName()
+                    + iTestResult.getTestClass().getName() +
+                    ".log").toPath());
+        } catch (IOException e) {
+            log.error("Some failure during log file attaching" +
+                    iTestResult.getMethod().getMethodName() + iTestResult.getTestName(), e);
+        }
+        return array;
     }
 }
