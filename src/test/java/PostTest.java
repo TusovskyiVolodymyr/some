@@ -13,8 +13,6 @@ public class PostTest extends BaseTest {
     private LoginBO loginBO;
     @Injector
     private HeaderPO headerPO;
-    //    @Injector
-//    private UserProfileBO userProfileBO;
     @Injector
     private SearchPO searchPO;
     @Injector
@@ -22,12 +20,10 @@ public class PostTest extends BaseTest {
     @Injector
     private PostBO postBO;
 
-
     @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test
-    public void test() throws InterruptedException {
+    public void test() {
         System.out.println("current thread: " + Thread.currentThread().getName());
-
         headerPO.act_clickUserProfileIcon();
         postBO.act_createPostWithText("Hello all!");
     }

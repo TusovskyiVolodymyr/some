@@ -42,7 +42,7 @@ public class Verify {
         return true;
     }
 
-    @Step("{0}")
+    @Step("message")
     public static void info(String message) {
         log.info(message);
     }

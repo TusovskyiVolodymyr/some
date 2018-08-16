@@ -19,12 +19,12 @@ public class LoggerWrapper {
         return new LoggerWrapper(aClass);
     }
 
-    @Step()
+    @Step(value = "{message}")
     public void info(String message) {
         log.info(message);
     }
 
-    @Step()
+    @Step(value = "{message}")
     public void error(String message) {
         log.error(message);
     }

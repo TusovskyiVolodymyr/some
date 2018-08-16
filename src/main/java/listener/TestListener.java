@@ -19,7 +19,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-//        Appender.fileAppender(iTestResult.getMethod().getMethodName()+iTestResult.getTestClass().getName());
     }
 
     @Override

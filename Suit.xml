@@ -6,14 +6,20 @@
 
     <parameter name="browser" value="${test.env}"/>
 
-    <test name="order" parallel="methods" thread-count="1">
-        <classes>
-            <class name="PostTest"/>
-        </classes>
-    </test>
+    <!--<test name="order" parallel="methods" thread-count="1">-->
+        <!--<classes>-->
+            <!--<class name="PostTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="order2" parallel="methods" thread-count="2">
         <classes>
-            <class name="SearchTest"/>
+            <class name="SearchTest">
+                <methods>
+                    <include name="test2"></include>
+                    <include name="test4"></include>
+                </methods>
+            </class>
+            <!--<class name="PostTest"/>-->
         </classes>
     </test>
 </suite>

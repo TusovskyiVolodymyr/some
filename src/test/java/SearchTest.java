@@ -25,18 +25,18 @@ public class SearchTest extends BaseTest {
     @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test
     public void test() throws InterruptedException {
-        System.out.println("current thread: "+Thread.currentThread().getName());
+        System.out.println("current thread: " + Thread.currentThread().getName());
 
         searchPO.act_typeSearchWorld("Chandler Bing");
-        searchPO  .act_clickSearchButton();
+        searchPO.act_clickSearchButton();
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test()
     public void test3() throws InterruptedException {
-            searchPO.act_typeSearchWorld("Chandler Bing")
-                    .ver_textTyped("Chandler Bing");
+        searchPO.act_typeSearchWorld("Chandler Bing")
+                .ver_textTyped("Chandler Bing");
     }
 
 
@@ -45,13 +45,21 @@ public class SearchTest extends BaseTest {
     public void test2() throws InterruptedException {
         searchPO.act_typeSearchWorld("Chandler Bing")
                 .act_clickSearchButton();
+        unlock("2");
+        lock("1");
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
     @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test(priority = 2)
     public void test4() throws InterruptedException {
-        searchPO.act_typeSearchWorld("Chandler Bing")
-        .ver_textTyped("Chandler Bing");
+
+        searchPO.act_typeSearchWorld("Chandler Bing");
+        lock("2");
+        searchPO  .ver_textTyped("Chandler Bing");
+        System.out.println("Sleeeeping");
+        Thread.sleep(7000);
+        System.out.println("awake");
+        unlock("1");
     }
 }
