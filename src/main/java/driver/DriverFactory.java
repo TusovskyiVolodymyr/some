@@ -27,7 +27,7 @@ public class DriverFactory {
     private DriverFactory() {
     }
 
-    public static WebDriver getWebDriver(String browserType) {
+    public synchronized static WebDriver getWebDriver(String browserType) {
         Optional<String> checkNull = Optional.ofNullable(browserType);
         browserType = checkNull.orElse("chrome");
         WebDriver instance = null;

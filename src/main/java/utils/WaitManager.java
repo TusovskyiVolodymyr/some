@@ -2,6 +2,8 @@ package utils;
 
 import consts.Constants;
 import driver.WebDriverManager;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +14,7 @@ import java.time.Duration;
 
 public class WaitManager {
 
-    private final static LoggerWrapper log = LoggerWrapper.getLogger(WaitManager.class);
+    private final static Logger log = LogManager.getLogger(WaitManager.class);
 
     public static void waitElementToBePresent(WebElement webElement, int seconds) {
         log.info(String.format("Waiting for element with such locator: %s to be present in %d seconds", StringUtils.getXpathOfWebElement(webElement), seconds));

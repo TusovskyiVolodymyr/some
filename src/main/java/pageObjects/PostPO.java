@@ -1,6 +1,8 @@
 package pageObjects;
 
+import driver.WebDriverManager;
 import elements.Button;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Verify;
@@ -31,6 +33,14 @@ public class PostPO extends BasePO {
     public PostPO ver_makePostLabel() {
         WaitManager.waitElementToBeVisible(makePostLabel);
         Verify.elementVisible(makePostLabel);
+        return this;
+    }
+
+    public PostPO act_likePostWithText(String textInPost) {
+        WebElement webElement = WebDriverManager.getDriver().findElement(By.xpath("//p[contains(text(),'" + textInPost + "')]" +
+                "//following::*[contains(@role,'button') and text()='Like']"));
+        WaitManager.waitUntilBeClickable(webElement, 5);
+        webElement.click();
         return this;
     }
 }

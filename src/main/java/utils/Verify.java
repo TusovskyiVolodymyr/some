@@ -21,7 +21,8 @@ public class Verify {
         try {
             Assert.assertTrue(isVisible, "Element with locator: " + StringUtils.getXpathOfWebElement(webElement) + "is visible!");
         } catch (AssertionError assertionError) {
-            System.out.println("Is assertion error do smht");
+            log.error("ASSERTION FAILED: [EXPECTED] " + StringUtils.getXpathOfWebElement(webElement) + "visible, but found false!!!");
+            throw new AssertionError();
         }
         return isVisible;
     }

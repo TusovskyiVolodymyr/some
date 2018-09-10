@@ -1,7 +1,4 @@
-import annotations.Credentials;
-import annotations.Injector;
 import annotations.Instance;
-import bussinesObjects.LoginBO;
 import driver.WebDriverManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import utils.Appender;
-import utils.CsvUtils;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -45,21 +41,11 @@ public class BaseTest {
         log.warn("Thread was unlocked by " + Thread.currentThread().getName());
     }
 
-    @Injector
-    private LoginBO loginBO;
-
     @Parameters(value = "browser")
     @BeforeMethod
-    public void login(Method method, @Optional String browserType) {
+    public void setup(Method method, @Optional String browserType) {
         Appender.fileAppender(method.getName()+method.getDeclaringClass().getName());
         WebDriverManager.setDriver(browserType);
-        if (method.isAnnotationPresent(Credentials.class)) {
-            String[] strings = method.getAnnotation(Credentials.class).creds();
-            if (!(strings[0] == null && strings[1] == null)) {
-                loginBO = new LoginBO();
-                loginBO.logIn(CsvUtils.getParam(strings[0]), CsvUtils.getParam(strings[1]));
-            }
-        }
         Instance.create(this);
     }
 

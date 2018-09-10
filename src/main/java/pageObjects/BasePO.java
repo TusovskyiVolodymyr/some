@@ -4,11 +4,12 @@ import annotations.Instance;
 import driver.WebDriverManager;
 import elements.CustomFieldDecorator;
 import elements.IElement;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import utils.LoggerWrapper;
 import utils.PropertiesUtill;
 import utils.StringUtils;
 import utils.WaitManager;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 
 public abstract class BasePO {
 
-    private static LoggerWrapper log = LoggerWrapper.getLogger(BasePO.class);
+    private static Logger log = LogManager.getLogger(BasePO.class);
     protected PropertiesUtill utill;
 
     protected BasePO() {
@@ -43,11 +44,10 @@ public abstract class BasePO {
 
     protected BasePO click(IElement webElement) {
         WaitManager.waitUntilJSLoad();
-//        WaitManager.waitUntillBeClickable(webElement);
 //        String color = highlightElement(webElement);
         webElement.click();
         System.out.println("element Wrapper: " + webElement);
-//        WaitManager.waitUntilJSLoad();
+        WaitManager.waitUntilJSLoad();
 //        unHighlightElement(webElement, color);
         log.info(String.format("Element with locator: %s was clicked!", webElement.getXpath()));
         return this;
@@ -88,20 +88,12 @@ public abstract class BasePO {
         return this;
     }
 
-    protected BasePO ver_ElementIsPresent(WebElement webElement) {
-        WaitManager.waitUntilJSLoad();
-        WaitManager.waitElementToBePresent(webElement);
-        String c = highlightElement(webElement);
-        log.info("Verifying element with locator: " + StringUtils.getXpathOfWebElement(webElement));
-        Assert.assertTrue(webElement != null);
-        return this;
-    }
-
 
     protected String highlightElement(WebElement element) {
         String color = element.getCssValue("background-Color");
         JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
         js.executeScript("arguments[0].style.backgroundColor = 'orange';", element);
+        WaitManager.waitUntilJSLoad();
         return color;
     }
 

@@ -4,6 +4,7 @@ import driver.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.Verify;
 
 public class LoginPO extends BasePO {
 
@@ -39,7 +40,7 @@ public class LoginPO extends BasePO {
     public LoginPO ver_Loged(String user) {
         By by = By.xpath("//*[@data-click='profile_icon']//span[contains(text(),'" + user + "')]");
         WebElement webElement = WebDriverManager.getDriver().findElement(by);
-        ver_ElementIsPresent(webElement);
+        Verify.elementVisible(webElement);
         return this;
     }
 }
