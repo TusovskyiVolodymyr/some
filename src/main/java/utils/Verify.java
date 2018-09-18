@@ -1,10 +1,11 @@
 package utils;
 
-import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import static utils.JSUtils.highlightElement;
 
 public class Verify {
 
@@ -20,8 +21,12 @@ public class Verify {
         boolean isVisible = webElement.isDisplayed();
         try {
             Assert.assertTrue(isVisible, "Element with locator: " + StringUtils.getXpathOfWebElement(webElement) + "is visible!");
+            highlightElement(webElement);
+            log.info("ASSERTED: " + StringUtils.getXpathOfWebElement(webElement)
+                    + "expected visible [true], found [" + isVisible + "]");
         } catch (AssertionError assertionError) {
-            log.error("ASSERTION FAILED: [EXPECTED] " + StringUtils.getXpathOfWebElement(webElement) + "visible, but found false!!!");
+            log.error("ASSERTION FAILED: " + StringUtils.getXpathOfWebElement(webElement) + "expected visible [true], but found ["
+                    + isVisible + "]");
             throw new AssertionError();
         }
         return isVisible;
@@ -29,23 +34,33 @@ public class Verify {
 
     public static boolean elementNotVisible(WebElement webElement) {
         boolean isVisible = webElement.isDisplayed();
-        Assert.assertFalse(isVisible, "Element with locator: " + StringUtils.getXpathOfWebElement(webElement) + "is visible!");
+        Assert.assertFalse(isVisible, "Element with locator: "
+                + StringUtils.getXpathOfWebElement(webElement) + "is visible!");
         return isVisible;
     }
 
-    public static boolean textPresent(WebElement element, String text) {
-        Assert.assertEquals(element.getText(), text, "text");
-        return true;
+    public static boolean textPresent(WebElement element, String expectedText) {
+        String text = element.getText();
+        boolean isTextPresent = text.equals(expectedText);
+        try {
+            Assert.assertTrue(isTextPresent);
+            log.info("ASSERTED: [EXPECTED] " + StringUtils.getXpathOfWebElement(element)
+                    + "text: [" + expectedText + "], found: [" + text + "]");
+        } catch (AssertionError assertionError) {
+            log.error("ASSERTION FAILED: [EXPECTED] "
+                    + StringUtils.getXpathOfWebElement(element) + "text: [" + expectedText + "] but found: ["
+                    + text + "]");
+        }
+        return isTextPresent;
     }
 
-    public static boolean isTrue(boolean isTrue) {
-        Assert.assertTrue(isTrue, "condition is true");
-        return true;
+    public static boolean isTrue(boolean isTrue, String message) {
+        try {
+            Assert.assertTrue(isTrue, message);
+            log.info("ASSERTED: [EXPECTED] " + message + "expected [true], found: [" + isTrue + "]");
+        } catch (AssertionError assertionError) {
+            log.error("ASSERTION FAILED" + message + "expected [true], but found: [" + isTrue + "]");
+        }
+        return isTrue;
     }
-
-    @Step("message")
-    public static void info(String message) {
-        log.info(message);
-    }
-
 }

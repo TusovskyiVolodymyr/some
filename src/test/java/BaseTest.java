@@ -13,29 +13,29 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     private final static Logger log = LogManager.getLogger(BaseTest.class);
 
     private Set<String> set = new HashSet<>();
 
-    public  void lock(String message) throws InterruptedException {
-        int c  = 0;
+    public void waitForMessage(String message) throws InterruptedException {
+        int counter = 0;
         log.warn("Thread was locked by " + Thread.currentThread().getName());
         while (true) {
-            if (set.contains(message)){
+            if (set.contains(message)) {
                 break;
             }
             log.warn("waiting for event: " + message);
             Thread.sleep(1000);
-            c++;
-            if (c==20){
-               throw new SkipException("TimeOut");
+            counter++;
+            if (counter == 20) {
+                throw new SkipException("TimeOut");
             }
         }
     }
 
-    public  void unlock(String message) throws InterruptedException {
+    public void postMessage(String message) throws InterruptedException {
         set.add(message);
         log.warn("Swt" + set.toString());
         log.warn("Thread was unlocked by " + Thread.currentThread().getName());
@@ -44,7 +44,7 @@ public class BaseTest {
     @Parameters(value = "browser")
     @BeforeMethod
     public void setup(Method method, @Optional String browserType) {
-        Appender.fileAppender(method.getName()+method.getDeclaringClass().getName());
+        Appender.fileAppender(method.getName() + method.getDeclaringClass().getName());
         WebDriverManager.setDriver(browserType);
         Instance.create(this);
     }

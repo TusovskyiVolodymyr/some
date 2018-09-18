@@ -1,6 +1,7 @@
 package pageObjects;
 
 import driver.WebDriverManager;
+import elements.IElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,7 +40,7 @@ public class UserProfilePO extends BasePO {
     }
 
     public UserProfilePO act_clickUploadPhoto() {
-        waitElementToBePresent(uploadPhoto, 5);
+        waitElementToBePresent((IElement) uploadPhoto, 5);
         click(uploadPhoto);
         return this;
     }

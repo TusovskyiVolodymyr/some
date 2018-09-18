@@ -24,7 +24,7 @@ public class SearchPO extends HeaderPO {
     }
 
     public SearchPO ver_textTyped(String text) {
-        Verify.isTrue(getInputValue(searchInput).equals(text));
+        Verify.isTrue(getInputValue(searchInput).equals(text), "text is typed is search field");
         return this;
     }
 }

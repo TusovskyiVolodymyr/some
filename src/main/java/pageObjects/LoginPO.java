@@ -1,6 +1,7 @@
 package pageObjects;
 
 import driver.WebDriverManager;
+import elements.BaseElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ public class LoginPO extends BasePO {
     private WebElement password;
 
     @FindBy(xpath = "//*[contains(@type,'submit')]")
-    private WebElement submit;
+    private BaseElement submit;
 
     public LoginPO act_getLoginUrl() {
         WebDriverManager.getDriver().get(utill.getBaseUrl());

@@ -2,7 +2,6 @@ package utils;
 
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +9,6 @@ import java.util.regex.Pattern;
 public class StringUtils {
 
     public static String getXpathOfWebElement(WebElement webElement) {
-        // name
         String locator = null;
         Pattern patternXpath = Pattern.compile("(xpath:.(.*))|(elector:.(.*))");
         Matcher matcher = patternXpath.matcher(webElement.toString());

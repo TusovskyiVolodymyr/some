@@ -4,7 +4,7 @@ import bussinesObjects.LoginBO;
 import bussinesObjects.PostBO;
 import bussinesObjects.UserProfileBO;
 import org.testng.annotations.Test;
-import utils.CsvUtils;
+import utils.WebDriverProperties;
 
 public class PostLikeTest extends BaseTest {
     @Injector
@@ -18,14 +18,14 @@ public class PostLikeTest extends BaseTest {
 
     @Test
     public void createPost() {
-        loginBO.logIn(CsvUtils.getParam("testLogin1"), CsvUtils.getParam("testPassword1"));
+        loginBO.logIn(WebDriverProperties.getProperty("testLogin1"), WebDriverProperties.getProperty("testPassword1"));
         headerBO.act_clickUserProfileIcon();
         postBO.act_createPostWithText("Test post!");
     }
 
     @Test(priority = 1)
     public void likePost() throws InterruptedException {
-        loginBO.logIn(CsvUtils.getParam("testLogin2"), CsvUtils.getParam("testPassword2"));
+        loginBO.logIn(WebDriverProperties.getProperty("testLogin2"), WebDriverProperties.getProperty("testPassword2"));
         headerBO.act_clickUserProfileIcon();
         userProfileBO.act_chooseFriendByFullName("Ross Geller");
         postBO.act_likePostWithText("Test post!");

@@ -61,8 +61,8 @@ public class SearchTest extends BaseTest {
         loginBO.logIn(CsvUtils.getParam("testLogin1"),CsvUtils.getParam("testPassword1"));
         searchPO.act_typeSearchWorld("Chandler Bing")
                 .act_clickSearchButton();
-        unlock("2");
-        lock("1");
+        postMessage("2");
+        waitForMessage("1");
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
@@ -74,11 +74,11 @@ public class SearchTest extends BaseTest {
         searchResultsPO = new SearchResultsPO();
         loginBO.logIn(CsvUtils.getParam("testLogin2"),CsvUtils.getParam("testPassword2"));
         searchPO.act_typeSearchWorld("Chandler Bing");
-        lock("2");
+        waitForMessage("2");
         searchPO  .ver_textTyped("Chandler Bing");
         System.out.println("Sleeeeping");
         Thread.sleep(7000);
         System.out.println("awake");
-        unlock("1");
+        postMessage("1");
     }
 }

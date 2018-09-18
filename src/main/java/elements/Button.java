@@ -11,9 +11,7 @@ public class Button extends BaseElement {
 
     public void clickOn() {
         WaitManager.waitUntillBeClickable(webElement);
-        if (isClickable()) {
             click();
-        }
     }
 
     public boolean isClickable() {

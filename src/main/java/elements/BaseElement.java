@@ -20,7 +20,6 @@ public class BaseElement implements IElement {
 
     @Override
     public void click() {
-        System.out.println("inside wraper");
         if (isEnabled()) {
             webElement.click();
         }
@@ -104,5 +103,15 @@ public class BaseElement implements IElement {
     @Override
     public String getXpath() {
         return StringUtils.getXpathOfWebElement(webElement);
+    }
+
+    @Override
+    public String toString() {
+        return webElement.toString();
+    }
+
+    @Override
+    public WebElement getWebElement() {
+        return webElement;
     }
 }

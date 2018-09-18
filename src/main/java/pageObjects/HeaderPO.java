@@ -2,9 +2,7 @@ package pageObjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.WaitManager;
-
-import java.util.Objects;
+import utils.Verify;
 
 public class HeaderPO extends BasePO {
 
@@ -75,9 +73,8 @@ public class HeaderPO extends BasePO {
         return this;
     }
 
-
-    public boolean isNewNotification() {
-        WaitManager.waitElementToBeNotPresent(notificationCount);
-        return !Objects.equals(getText(notificationCount), "");
+    public HeaderPO ver_userProfileIconPresent() {
+        Verify.elementVisible(userProfileIcon);
+        return this;
     }
 }
