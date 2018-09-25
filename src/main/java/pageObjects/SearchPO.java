@@ -1,20 +1,20 @@
 package pageObjects;
 
+import elements.BaseElement;
 import elements.Button;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Verify;
 
 public class SearchPO extends HeaderPO {
 
     @FindBy(xpath = "//*[@name='q']")
-    private WebElement searchInput;
+    private BaseElement searchInput;
 
     @FindBy(xpath = "//*[@aria-label='Search' and @type='submit']")
     private Button searchButton;
 
     public SearchPO act_typeSearchWorld(String text) {
-        typeText(searchInput, text);
+        searchInput.sendKeys(text);
         return this;
     }
 
@@ -24,7 +24,7 @@ public class SearchPO extends HeaderPO {
     }
 
     public SearchPO ver_textTyped(String text) {
-        Verify.isTrue(getInputValue(searchInput).equals(text), "text is typed is search field");
+        Verify.isTrue(searchInput.getInputValue().equals(text), "text is typed is search field");
         return this;
     }
 }

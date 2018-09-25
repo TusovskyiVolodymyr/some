@@ -24,7 +24,7 @@ public class SearchResultsPO extends BasePO {
 
     public SearchResultsPO act_chooseSearchType(SearchType searchType) {
         WebElement type = WebDriverManager.getDriver().findElement(By.xpath("//*[@aria-label='Search Results']//*[contains(text(),'" + searchType.getType() + "')]"));
-        click(type);
+        type.click();
         return this;
     }
 }

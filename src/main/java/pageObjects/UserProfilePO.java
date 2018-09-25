@@ -1,13 +1,11 @@
 package pageObjects;
 
 import driver.WebDriverManager;
-import elements.IElement;
+import elements.BaseElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.WaitManager;
-
-import static utils.WaitManager.waitElementToBePresent;
 
 public class UserProfilePO extends BasePO {
 
@@ -26,22 +24,21 @@ public class UserProfilePO extends BasePO {
     }
 
     @FindBy(xpath = "//*[contains(@class,'photoContainer')]//ancestor::*[contains(text(),'Add Photo')]")
-    private WebElement uploadProfilePhoto;
+    private BaseElement uploadProfilePhoto;
 
     @FindBy(xpath = "//*[contains(text(),'Upload Photo')]//parent::div")
-    private WebElement uploadPhoto;
+    private BaseElement uploadPhoto;
 
     @FindBy(xpath = "//*[@class='inputtext']")
-    private WebElement friendsSearchInput;
+    private BaseElement friendsSearchInput;
 
     public UserProfilePO act_clickUploadProfilePhoto() {
-        click(uploadProfilePhoto);
+        uploadProfilePhoto.click();
         return this;
     }
 
     public UserProfilePO act_clickUploadPhoto() {
-        waitElementToBePresent((IElement) uploadPhoto, 5);
-        click(uploadPhoto);
+        uploadPhoto.click();
         return this;
     }
 
@@ -61,7 +58,7 @@ public class UserProfilePO extends BasePO {
     }
 
     public UserProfilePO act_searchFriendByFullName(String fullName) {
-        typeText(friendsSearchInput, fullName);
+        friendsSearchInput.sendKeys(fullName);
         return this;
     }
 

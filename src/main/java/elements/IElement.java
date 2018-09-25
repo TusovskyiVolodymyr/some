@@ -7,4 +7,6 @@ public interface IElement extends WebElement {
     String getXpath();
 
     WebElement getWebElement();
+
+    String getInputValue();
 }

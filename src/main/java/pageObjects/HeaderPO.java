@@ -1,75 +1,75 @@
 package pageObjects;
 
-import org.openqa.selenium.WebElement;
+import elements.BaseElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Verify;
 
 public class HeaderPO extends BasePO {
 
     @FindBy(xpath = "//*[contains(@data-click,'profile_icon')]")
-    private WebElement userProfileIcon;
+    private BaseElement userProfileIcon;
 
     @FindBy(xpath = "//*[contains(@id,'notificationsCountValue')]")
-    private WebElement notificationCount;
+    private BaseElement notificationCount;
 
     @FindBy(xpath = "//*[contains(@data-click,'home_icon')]")
-    private WebElement homeButton;
+    private BaseElement homeButton;
 
     @FindBy(xpath = "//*[contains(@id,'findFriendsNav')]")
-    private WebElement findFriends;
+    private BaseElement findFriends;
 
     @FindBy(xpath = "//*[contains(@data-tooltip-content,'Friend Requests')]")
-    private WebElement friendsRequests;
+    private BaseElement friendsRequests;
 
     @FindBy(xpath = "//*[contains(@data-tooltip-content,'Messages')]")
-    private WebElement messages;
+    private BaseElement messages;
 
     @FindBy(xpath = "//*[contains(@data-tooltip-content,'Notifications')]")
-    private WebElement notifications;
+    private BaseElement notifications;
 
     @FindBy(xpath = "//*[contains(@data-tooltip-content,'Quick Help')]")
-    private WebElement help;
+    private BaseElement help;
 
     @FindBy(xpath = "//*[contains(@aria-labelledby,'userNavigationLabel')]")
-    private WebElement navigationArrow;
+    private BaseElement navigationArrow;
 
     public HeaderPO act_clickUserProfileIcon() {
-        click(userProfileIcon);
+        userProfileIcon.click();
         return this;
     }
 
     public HeaderPO act_clickHome() {
-        click(homeButton);
+        homeButton.click();
         return this;
     }
 
     public HeaderPO act_clickFindFriends() {
-        click(findFriends);
+        findFriends.click();
         return this;
     }
 
     public HeaderPO act_clickFriendsRequests() {
-        click(friendsRequests);
+        friendsRequests.click();
         return this;
     }
 
     public HeaderPO act_clickMessages() {
-        click(messages);
+        messages.click();
         return this;
     }
 
     public HeaderPO act_clickNotifications() {
-        click(notifications);
+        notifications.click();
         return this;
     }
 
     public HeaderPO act_clickHelp() {
-        click(help);
+        help.click();
         return this;
     }
 
     public HeaderPO act_clickNavigationArrow() {
-        click(navigationArrow);
+        navigationArrow.click();
         return this;
     }
 

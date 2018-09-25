@@ -1,6 +1,7 @@
 package pageObjects;
 
 import driver.WebDriverManager;
+import elements.BaseElement;
 import elements.Button;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,22 +12,22 @@ import utils.WaitManager;
 public class PostPO extends BasePO {
 
     @FindBy(xpath = "//*[@aria-label='Create a post']//*[@role='presentation']//div[contains(@role,'textbox')]")
-    private WebElement createPost;
+    private BaseElement createPost;
 
     @FindBy(xpath = "//*[contains(@data-testid,'post-button')]")
     private Button postButton;
 
     @FindBy(xpath = "//*[@aria-label='Create a post']//*[contains(text(),'Make Post')]")
-    private WebElement makePostLabel;
+    private BaseElement makePostLabel;
 
     public PostPO act_typePostText(String text) {
-        typeText(createPost, text);
+        createPost.sendKeys(text);
         return this;
     }
 
     public PostPO act_clickPostButton() {
         System.out.println(postButton);
-        click(postButton);
+        postButton.click();
         return this;
     }
 

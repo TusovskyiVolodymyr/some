@@ -1,11 +1,18 @@
 package elements;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import utils.StringUtils;
+import utils.WaitManager;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static utils.JSUtils.highlightElement;
+
 public class BaseElement implements IElement {
+    private final static Logger log = LogManager.getLogger(BaseElement.class);
 
     protected WebElement webElement;
 
@@ -20,9 +27,12 @@ public class BaseElement implements IElement {
 
     @Override
     public void click() {
-        if (isEnabled()) {
-            webElement.click();
-        }
+        WaitManager.waitUntilJSLoad();
+        WaitManager.waitUntillBeClickable(webElement);
+        highlightElement(webElement);
+        webElement.click();
+        WaitManager.waitUntilJSLoad();
+        log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
     }
 
     @Override
@@ -32,7 +42,13 @@ public class BaseElement implements IElement {
 
     @Override
     public void sendKeys(CharSequence... charSequences) {
+        WaitManager.waitUntilJSLoad();
+        WaitManager.waitElementToBeVisible(webElement);
+        highlightElement(webElement);
         webElement.sendKeys(charSequences);
+        WaitManager.waitUntilJSLoad();
+        log.info(String.format("In element with locator: %s was typed: %s", StringUtils.getXpathOfWebElement(webElement),
+                Arrays.toString(charSequences)));
     }
 
     @Override
@@ -62,7 +78,13 @@ public class BaseElement implements IElement {
 
     @Override
     public String getText() {
-        return webElement.getText();
+        WaitManager.waitUntilJSLoad();
+        WaitManager.waitElementToBeVisible(webElement);
+        highlightElement(webElement);
+        String text = webElement.getText();
+        log.info(String.format("Getting text from element with locator: %s text: %s",
+                StringUtils.getXpathOfWebElement(webElement), webElement.getText()));
+        return text;
     }
 
     @Override
@@ -113,5 +135,15 @@ public class BaseElement implements IElement {
     @Override
     public WebElement getWebElement() {
         return webElement;
+    }
+
+    @Override
+    public String getInputValue() {
+        WaitManager.waitElementToBeVisible(webElement);
+        WaitManager.waitUntilJSLoad();
+        String text = getAttribute("value");
+        log.info(String.format("Getting text from input with locator: %s text: %s", StringUtils.getXpathOfWebElement(webElement), text));
+        WaitManager.waitUntilJSLoad();
+        return text;
     }
 }

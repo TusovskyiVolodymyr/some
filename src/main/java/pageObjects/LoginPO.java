@@ -10,10 +10,10 @@ import utils.Verify;
 public class LoginPO extends BasePO {
 
     @FindBy(xpath = "//*[contains(@type,'email')]")
-    private WebElement login;
+    private BaseElement login;
 
     @FindBy(css = "#pass")
-    private WebElement password;
+    private BaseElement password;
 
     @FindBy(xpath = "//*[contains(@type,'submit')]")
     private BaseElement submit;
@@ -24,17 +24,17 @@ public class LoginPO extends BasePO {
     }
 
     public LoginPO act_typeLogin(String login) {
-        typeText(this.login, login);
+        this.login.sendKeys(login);
         return this;
     }
 
     public LoginPO act_typePassword(String password) {
-        typeText(this.password, password);
+        this.password.sendKeys(password);
         return this;
     }
 
     public LoginPO act_clickLoginButton() {
-        click(submit);
+        submit.click();
         return this;
     }
 
