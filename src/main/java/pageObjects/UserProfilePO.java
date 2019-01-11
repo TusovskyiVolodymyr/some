@@ -1,66 +1,64 @@
 package pageObjects;
 
-import driver.WebDriverManager;
-import elements.BaseElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import utils.WaitManager;
+import utils.StringUtils;
 
 public class UserProfilePO extends BasePO {
 
+    private enum UserProfileElements {
+        BTN_UPLOAD_PROFILE_PHOTO(By.xpath("//*[contains(@class,'photoContainer')]//ancestor::*[contains(text(),'Add Photo')]")),
+        BTN_UPLOAD_PHOTO(By.xpath("//*[contains(text(),'Upload Photo')]//parent::div")),
+        IPF_FRIEND_SEARCH(By.xpath("//*[@class='inputtext8']")),
+        DIV_TIMELINE_ITEM(By.xpath("//*[@id='fbTimelineHeadline']//following::*[@data-referrer='timeline_light_nav_top']//a[contains(text(),'%s')]")),
+        DIV_FRIEND_IN_SEARCH(By.xpath("//*[contains(text(),'%s') and @class='name']"));
+
+        private By by;
+
+        UserProfileElements(By by) {
+            this.by = by;
+        }
+
+        public By get() {
+            return by;
+        }
+
+        public By getWithParams(Object... params) {
+            return StringUtils.getLocator(by, params);
+        }
+
+    }
+
     public enum TimeLineElements {
-        TIMELINE("Timeline"), ABOUT("About"), FRIENDS("Friends"), PHOTOS("Photos"), ARCHIVE("Archive"), MORE("More");
+        TIMELINE("Timeline"),
+        ABOUT("About"),
+        FRIENDS("Friends"),
+        PHOTOS("Photos"),
+        ARCHIVE("Archive"),
+        MORE("More");
+
+        private String value;
 
         TimeLineElements(String value) {
             this.value = value;
         }
-
-        private String value;
 
         public String get() {
             return value;
         }
     }
 
-    @FindBy(xpath = "//*[contains(@class,'photoContainer')]//ancestor::*[contains(text(),'Add Photo')]")
-    private BaseElement uploadProfilePhoto;
-
-    @FindBy(xpath = "//*[contains(text(),'Upload Photo')]//parent::div")
-    private BaseElement uploadPhoto;
-
-    @FindBy(xpath = "//*[@class='inputtext']")
-    private BaseElement friendsSearchInput;
-
-    public UserProfilePO act_clickUploadProfilePhoto() {
-        uploadProfilePhoto.click();
-        return this;
-    }
-
-    public UserProfilePO act_clickUploadPhoto() {
-        uploadPhoto.click();
-        return this;
-    }
-
     public UserProfilePO act_chooseFromTimeLine(TimeLineElements timeLineElements) {
-        WebElement timeLineElement = WebDriverManager.getDriver().findElement(By.xpath("//*[@id='fbTimelineHeadline']" +
-                "//following::*[@data-referrer='timeline_light_nav_top']//a[contains(text(),'"
-                + timeLineElements.get() + "')]"));
-        WaitManager.waitUntilBeClickable(timeLineElement, 10);
-        timeLineElement.click();
+        click(UserProfileElements.DIV_TIMELINE_ITEM.getWithParams(timeLineElements.get()));
         return this;
     }
 
     public UserProfilePO act_chooseFriendByFullName(String fullName) {
-        WebElement friend = WebDriverManager.getDriver().findElement(By.xpath("//*[contains(text(),'" + fullName + "') and @class='name']"));
-        friend.click();
+        click(UserProfileElements.DIV_FRIEND_IN_SEARCH.getWithParams(fullName));
         return this;
     }
 
     public UserProfilePO act_searchFriendByFullName(String fullName) {
-        friendsSearchInput.sendKeys(fullName);
+        typeText(UserProfileElements.IPF_FRIEND_SEARCH.get(), fullName);
         return this;
     }
-
-
 }

@@ -9,7 +9,7 @@ public class LoggerWrapper {
 
     private Logger log;
 
-    private static LoggerWrapper loggerWrapper;
+    private  LoggerWrapper loggerWrapper;
 
     private LoggerWrapper(Class aClass) {
         log = LogManager.getLogger(aClass);

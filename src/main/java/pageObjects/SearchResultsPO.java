@@ -1,10 +1,28 @@
 package pageObjects;
 
-import driver.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import utils.StringUtils;
 
 public class SearchResultsPO extends BasePO {
+
+    private enum SearchElements {
+        DIV_SEARCH_TYPE(By.xpath("//*[@aria-label='Search Results']//*[contains(text(),'%s')]"));
+
+        private By by;
+
+        SearchElements(By by) {
+            this.by = by;
+        }
+
+        public By get() {
+            return by;
+        }
+
+        public By getWithParams(Object... params) {
+            return StringUtils.getLocator(by, params);
+        }
+
+    }
 
     public enum SearchType {
 
@@ -23,8 +41,7 @@ public class SearchResultsPO extends BasePO {
     }
 
     public SearchResultsPO act_chooseSearchType(SearchType searchType) {
-        WebElement type = WebDriverManager.getDriver().findElement(By.xpath("//*[@aria-label='Search Results']//*[contains(text(),'" + searchType.getType() + "')]"));
-        type.click();
+        click(SearchElements.DIV_SEARCH_TYPE.getWithParams(searchType.getType()));
         return this;
     }
 }

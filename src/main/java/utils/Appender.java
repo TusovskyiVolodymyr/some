@@ -29,6 +29,7 @@ public class Appender {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("file appender: " + fileAppender.toString());
         rootLogger.addAppender(fileAppender);
     }
 }

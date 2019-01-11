@@ -1,80 +1,33 @@
 package pageObjects;
 
-import elements.BaseElement;
-import org.openqa.selenium.support.FindBy;
-import utils.Verify;
+import org.openqa.selenium.By;
 
 public class HeaderPO extends BasePO {
 
-    @FindBy(xpath = "//*[contains(@data-click,'profile_icon')]")
-    private BaseElement userProfileIcon;
+    private enum HeaderPOElements {
+        USER_PROFILE_ICON(By.xpath("//*[contains(@data-click,'profile_icon')]")),
+        NOTIFICATION_COUNT(By.xpath("//*[contains(@id,'notificationsCountValue')]")),
+        BTN_HOME(By.xpath("//*[contains(@data-click,'home_icon')]")),
+        BTN_FIND_FRIENDS(By.xpath("//*[contains(@data-click,'home_icon')]")),
+        BTN_FRIENDS_REQUEST(By.xpath("//*[contains(@data-tooltip-content,'Friend Requests')]")),
+        BTN_MESSAGES(By.xpath("//*[contains(@data-tooltip-content,'Messages')]")),
+        BTN_NOTIFICATIONS(By.xpath("//*[contains(@data-tooltip-content,'Notifications')]")),
+        BTN_HELP(By.xpath("//*[contains(@data-tooltip-content,'Quick Help')]")),
+        BTN_NAVIGATION_ARROW(By.xpath("//*[contains(@aria-labelledby,'userNavigationLabel')]"));
 
-    @FindBy(xpath = "//*[contains(@id,'notificationsCountValue')]")
-    private BaseElement notificationCount;
+        private By by;
 
-    @FindBy(xpath = "//*[contains(@data-click,'home_icon')]")
-    private BaseElement homeButton;
+        HeaderPOElements(By by) {
+            this.by = by;
+        }
 
-    @FindBy(xpath = "//*[contains(@id,'findFriendsNav')]")
-    private BaseElement findFriends;
-
-    @FindBy(xpath = "//*[contains(@data-tooltip-content,'Friend Requests')]")
-    private BaseElement friendsRequests;
-
-    @FindBy(xpath = "//*[contains(@data-tooltip-content,'Messages')]")
-    private BaseElement messages;
-
-    @FindBy(xpath = "//*[contains(@data-tooltip-content,'Notifications')]")
-    private BaseElement notifications;
-
-    @FindBy(xpath = "//*[contains(@data-tooltip-content,'Quick Help')]")
-    private BaseElement help;
-
-    @FindBy(xpath = "//*[contains(@aria-labelledby,'userNavigationLabel')]")
-    private BaseElement navigationArrow;
+        public By get() {
+            return by;
+        }
+    }
 
     public HeaderPO act_clickUserProfileIcon() {
-        userProfileIcon.click();
-        return this;
-    }
-
-    public HeaderPO act_clickHome() {
-        homeButton.click();
-        return this;
-    }
-
-    public HeaderPO act_clickFindFriends() {
-        findFriends.click();
-        return this;
-    }
-
-    public HeaderPO act_clickFriendsRequests() {
-        friendsRequests.click();
-        return this;
-    }
-
-    public HeaderPO act_clickMessages() {
-        messages.click();
-        return this;
-    }
-
-    public HeaderPO act_clickNotifications() {
-        notifications.click();
-        return this;
-    }
-
-    public HeaderPO act_clickHelp() {
-        help.click();
-        return this;
-    }
-
-    public HeaderPO act_clickNavigationArrow() {
-        navigationArrow.click();
-        return this;
-    }
-
-    public HeaderPO ver_userProfileIconPresent() {
-        Verify.elementVisible(userProfileIcon);
+        click(HeaderPOElements.USER_PROFILE_ICON.get());
         return this;
     }
 }

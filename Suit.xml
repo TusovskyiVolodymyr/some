@@ -1,31 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestAll">
+<suite name="TestAll" verbose="5">
     <listeners>
     <listener class-name="listener.TestListener" />
     <!--<listener class-name="listener.InvokedMethodListener" />-->
     </listeners>
 
     <parameter name="browser" value="${test.env}"/>
+    <!--<parameter name="browser" value="chrome"/>-->
 
-    <!--<test name="order" parallel="methods" thread-count="1">-->
-        <!--<classes>-->
-            <!--<class name="PostTest"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="order2" parallel="methods" thread-count="2">-->
-        <!--<classes>-->
+    <test name="order2" parallel="methods" thread-count="4">
+        <classes>
             <!--<class name="SearchTest">-->
                 <!--<methods>-->
-                    <!--<include name="test2"></include>-->
-                    <!--<include name="test4"></include>-->
+                    <!--&lt;!&ndash;<include name="test2"></include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include name="test4"></include>&ndash;&gt;-->
                 <!--</methods>-->
             <!--</class>-->
-            <!--&lt;!&ndash;<class name="PostTest"/>&ndash;&gt;-->
-        <!--</classes>-->
-    <!--</test>-->
-    <test name="likeTest">
-        <classes>
             <class name="PostLikeTest"/>
         </classes>
     </test>
+
 </suite>

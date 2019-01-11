@@ -1,47 +1,45 @@
 package pageObjects;
 
-import driver.WebDriverManager;
-import elements.BaseElement;
-import elements.Button;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import utils.Verify;
-import utils.WaitManager;
+import utils.StringUtils;
 
 public class PostPO extends BasePO {
 
-    @FindBy(xpath = "//*[@aria-label='Create a post']//*[@role='presentation']//div[contains(@role,'textbox')]")
-    private BaseElement createPost;
+    private enum PostElements {
+        CREATE_POST(By.xpath("//*[@aria-label='Create a post']//*[@role='presentation']//div[contains(@role,'textbox')]")),
+        BTN_POST(By.xpath("//*[contains(@data-testid,'post-button')]")),
+        LBL_MAKE_POST(By.xpath("//*[@aria-label='Create a post']//*[contains(text(),'Make Post')]")),
+        BTN_LIKE_POST(By.xpath(("//p[contains(text(),'%s')]//following::*[contains(@role,'button') and text()='Like']")));
 
-    @FindBy(xpath = "//*[contains(@data-testid,'post-button')]")
-    private Button postButton;
+        private By by;
 
-    @FindBy(xpath = "//*[@aria-label='Create a post']//*[contains(text(),'Make Post')]")
-    private BaseElement makePostLabel;
+        PostElements(By by) {
+            this.by = by;
+        }
+
+        public By get() {
+            return by;
+        }
+
+        public By getWithParams(Object... params) {
+            return StringUtils.getLocator(by, params);
+        }
+
+    }
 
     public PostPO act_typePostText(String text) {
-        createPost.sendKeys(text);
+        typeText(PostElements.CREATE_POST.get(), text);
         return this;
     }
 
     public PostPO act_clickPostButton() {
-        System.out.println(postButton);
-        postButton.click();
+        click(PostElements.BTN_POST.get());
         return this;
     }
 
-    public PostPO ver_makePostLabel() {
-        WaitManager.waitElementToBeVisible(makePostLabel);
-        Verify.elementVisible(makePostLabel);
-        return this;
-    }
 
     public PostPO act_likePostWithText(String textInPost) {
-        WebElement webElement = WebDriverManager.getDriver().findElement(By.xpath("//p[contains(text(),'" + textInPost + "')]" +
-                "//following::*[contains(@role,'button') and text()='Like']"));
-        WaitManager.waitUntilBeClickable(webElement, 5);
-        webElement.click();
+        click(PostElements.BTN_LIKE_POST.getWithParams(textInPost));
         return this;
     }
 }

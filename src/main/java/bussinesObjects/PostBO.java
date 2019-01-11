@@ -10,8 +10,7 @@ public class PostBO extends BaseBO {
 
     public PostBO act_createPostWithText(String text) {
         postPO.act_typePostText(text)
-                .act_clickPostButton()
-                .ver_makePostLabel();
+                .act_clickPostButton();
         log.info("Creating new post with following text: " + text);
         return this;
     }

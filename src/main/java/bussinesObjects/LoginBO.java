@@ -16,7 +16,6 @@ public class LoginBO extends BaseBO {
                 .act_typeLogin(login)
                 .act_typePassword(password)
                 .act_clickLoginButton();
-        headerPO.ver_userProfileIconPresent();
         log.info(String.format("Successfully logged with such credentials: [%s], and [%s]", login, password));
         return this;
     }

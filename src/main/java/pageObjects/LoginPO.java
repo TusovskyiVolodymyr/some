@@ -1,22 +1,27 @@
 package pageObjects;
 
 import driver.WebDriverManager;
-import elements.BaseElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import utils.Verify;
 
 public class LoginPO extends BasePO {
 
-    @FindBy(xpath = "//*[contains(@type,'email')]")
-    private BaseElement login;
+    private enum LoginElements {
+        IPF_LOGIN(By.xpath("//*[contains(@type,'email')]")),
+        IPF_PASSWORD(By.cssSelector("#pass")),
+        BTN_SUBMIT(By.xpath("//*[contains(@type,'submit')]"));
 
-    @FindBy(css = "#pass")
-    private BaseElement password;
+        private By by;
 
-    @FindBy(xpath = "//*[contains(@type,'submit')]")
-    private BaseElement submit;
+        LoginElements(By by) {
+            this.by = by;
+        }
+
+        public By get() {
+            return by;
+        }
+    }
 
     public LoginPO act_getLoginUrl() {
         WebDriverManager.getDriver().get(utill.getBaseUrl());
@@ -24,17 +29,17 @@ public class LoginPO extends BasePO {
     }
 
     public LoginPO act_typeLogin(String login) {
-        this.login.sendKeys(login);
+        typeText(LoginElements.IPF_LOGIN.get(), login);
         return this;
     }
 
     public LoginPO act_typePassword(String password) {
-        this.password.sendKeys(password);
+        typeText(LoginElements.IPF_PASSWORD.get(), password);
         return this;
     }
 
     public LoginPO act_clickLoginButton() {
-        submit.click();
+        click(LoginElements.BTN_SUBMIT.get());
         return this;
     }
 
