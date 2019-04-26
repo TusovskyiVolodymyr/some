@@ -1,7 +1,5 @@
 package elements;
 
-import static utils.JSUtils.highlightElement;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -28,7 +26,7 @@ public class BaseElement implements IElement {
     @Override
     public void click() {
         WaitManager.waitUntilJSLoad();
-        highlightElement(webElement);
+//        highlightElement(webElement);
         webElement.click();
         WaitManager.waitUntilJSLoad();
         log.info(String.format("Element with locator: %s was clicked!", StringUtils.getXpathOfWebElement(webElement)));
@@ -42,7 +40,7 @@ public class BaseElement implements IElement {
     @Override
     public void sendKeys(CharSequence... charSequences) {
         WaitManager.waitUntilJSLoad();
-        highlightElement(webElement);
+//        highlightElement(webElement);
         webElement.sendKeys(charSequences);
         log.info(String.format("In element with locator: %s was typed: %s", StringUtils.getXpathOfWebElement(webElement),
                 Arrays.toString(charSequences)));
@@ -76,7 +74,7 @@ public class BaseElement implements IElement {
     @Override
     public String getText() {
         WaitManager.waitUntilJSLoad();
-        highlightElement(webElement);
+//        highlightElement(webElement);
         String text = webElement.getText();
         log.info(String.format("Getting text from element with locator: %s text: %s",
                 StringUtils.getXpathOfWebElement(webElement), webElement.getText()));

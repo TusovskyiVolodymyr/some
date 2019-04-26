@@ -1,9 +1,10 @@
 package pageObjects;
 
+import driver.WebDriverManager;
 import org.openqa.selenium.By;
+import utils.Verify;
 
 public class HeaderPO extends BasePO {
-
     private enum HeaderPOElements {
         USER_PROFILE_ICON(By.xpath("//*[contains(@data-click,'profile_icon')]")),
         NOTIFICATION_COUNT(By.xpath("//*[contains(@id,'notificationsCountValue')]")),
@@ -27,6 +28,7 @@ public class HeaderPO extends BasePO {
     }
 
     public HeaderPO act_clickUserProfileIcon() {
+        Verify.elementVisible(WebDriverManager.getDriver().findElement(HeaderPOElements.USER_PROFILE_ICON.get()));
         click(HeaderPOElements.USER_PROFILE_ICON.get());
         return this;
     }

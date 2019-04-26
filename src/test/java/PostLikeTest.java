@@ -1,3 +1,4 @@
+import annotations.Credentials;
 import annotations.Injector;
 import bussinesObjects.HeaderBO;
 import bussinesObjects.LoginBO;
@@ -5,7 +6,6 @@ import bussinesObjects.PostBO;
 import bussinesObjects.UserProfileBO;
 import driver.WebDriverManager;
 import org.testng.annotations.Test;
-import utils.WebDriverProperties;
 
 public class PostLikeTest extends BaseTest {
     @Injector
@@ -22,24 +22,23 @@ public class PostLikeTest extends BaseTest {
     }
 
     @Test
+    @Credentials(creds = {"testLogin1", "testPassword1"})
     public void createPost() throws InterruptedException {
-        loginBO.logIn(WebDriverProperties.getProperty("testLogin1"), WebDriverProperties.getProperty("testPassword1"));
         headerBO.act_clickUserProfileIcon();
         postBO.act_createPostWithText("Test post1!");
         postMessage(Events.POST_SENT);
         waitForMessage(Events.DONE);
     }
 
-    @Test()
+    @Test
+    @Credentials(creds = {"testLogin2", "testPassword2"})
     public void likePost() throws InterruptedException {
-        loginBO.logIn(WebDriverProperties.getProperty("testLogin2"), WebDriverProperties.getProperty("testPassword2"));
         waitForMessage(Events.POST_SENT);
         headerBO.act_clickUserProfileIcon();
         userProfileBO.act_chooseFriendByFullName("Ross Geller");
         WebDriverManager.getDriver().navigate().refresh();
         postBO.act_likePostWithText("Test post1!");
         postMessage(Events.DONE);
-
     }
 
 }

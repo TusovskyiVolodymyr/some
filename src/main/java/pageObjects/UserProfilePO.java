@@ -8,7 +8,7 @@ public class UserProfilePO extends BasePO {
     private enum UserProfileElements {
         BTN_UPLOAD_PROFILE_PHOTO(By.xpath("//*[contains(@class,'photoContainer')]//ancestor::*[contains(text(),'Add Photo')]")),
         BTN_UPLOAD_PHOTO(By.xpath("//*[contains(text(),'Upload Photo')]//parent::div")),
-        IPF_FRIEND_SEARCH(By.xpath("//*[@class='inputtext8']")),
+        IPF_FRIEND_SEARCH(By.xpath("//*[@class='inputtext']")),
         DIV_TIMELINE_ITEM(By.xpath("//*[@id='fbTimelineHeadline']//following::*[@data-referrer='timeline_light_nav_top']//a[contains(text(),'%s')]")),
         DIV_FRIEND_IN_SEARCH(By.xpath("//*[contains(text(),'%s') and @class='name']"));
 

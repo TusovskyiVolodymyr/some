@@ -5,10 +5,10 @@
     <!--<listener class-name="listener.InvokedMethodListener" />-->
     </listeners>
 
-    <parameter name="browser" value="${test.env}"/>
+    <!--<parameter name="browser" value="${test.env}"/>-->
     <!--<parameter name="browser" value="chrome"/>-->
 
-    <test name="order2" parallel="methods" thread-count="4">
+    <test name="order2" parallel="methods" thread-count="2">
         <classes>
             <!--<class name="SearchTest">-->
                 <!--<methods>-->

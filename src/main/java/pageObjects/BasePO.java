@@ -5,6 +5,7 @@ import driver.WebDriverManager;
 import elements.CustomFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import utils.JSUtils;
 import utils.LoggerWrapper;
 import utils.PropertiesUtill;
 import utils.WaitManager;
@@ -30,14 +31,18 @@ public abstract class BasePO {
     protected void click(By by) {
         WaitManager.waitElementToBeVisible(by);
         WaitManager.waitUntilBeClickable(by);
+        String color = JSUtils.highlightElement(by);
         WebDriverManager.getDriver().findElement(by).click();
+        JSUtils.unHighlightElement(by, color);
         log.info(String.format("Clicked on element with locator: [%s]", by.toString()));
     }
 
     protected void typeText(By by, String text) {
         WaitManager.waitElementToBeVisible(by);
         WaitManager.waitUntilBeClickable(by);
+        String color = JSUtils.highlightElement(by);
         WebDriverManager.getDriver().findElement(by).sendKeys(text);
+        JSUtils.unHighlightElement(by, color);
         log.info(String.format("Typed text on element with locator: [%s], text: [%s] ", by.toString(), text));
     }
 }

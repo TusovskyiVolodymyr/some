@@ -1,11 +1,11 @@
 package utils;
 
+import static utils.JSUtils.highlightElement;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
-import static utils.JSUtils.highlightElement;
 
 public class Verify {
 
@@ -21,12 +21,13 @@ public class Verify {
         boolean isVisible = webElement.isDisplayed();
         try {
             Assert.assertTrue(isVisible, "Element with locator: " + StringUtils.getXpathOfWebElement(webElement) + "is visible!");
-            highlightElement(webElement);
+            highlightElement(webElement, "green");
             log.info("ASSERTED: " + StringUtils.getXpathOfWebElement(webElement)
                     + "expected visible [true], found [" + isVisible + "]");
         } catch (AssertionError assertionError) {
             log.error("ASSERTION FAILED: " + StringUtils.getXpathOfWebElement(webElement) + "expected visible [true], but found ["
                     + isVisible + "]");
+            highlightElement(webElement, "red");
             throw new AssertionError();
         }
         return isVisible;
