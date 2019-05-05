@@ -31,7 +31,7 @@ public class Instance {
                     Class aClass = Class.forName(field.getType().getName());
                     Object obj = aClass.newInstance();
                     field.set(o, obj);
-                    log.debug(String.format("Instance of: %s was successfully created!", o.getClass().getName()));
+                    log.debug(String.format("Instance of: %s was successfully created!", field.getType().getName()));
                 }
             }
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {

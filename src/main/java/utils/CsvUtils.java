@@ -5,6 +5,7 @@ import exceptions.NoSuchUserParametrException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class CsvUtils {
         } catch (IOException e) {
             e.printStackTrace();// to do handling
         }
-        return null;// don`t return null
+        return Collections.emptyMap();// don`t return null
     }
 
     public static String getParam(String param) {

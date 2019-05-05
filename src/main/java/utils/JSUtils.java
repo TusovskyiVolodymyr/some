@@ -8,10 +8,11 @@ import org.openqa.selenium.WebElement;
 
 public class JSUtils {
     public static String highlightElement(WebElement element, String hightlightColor) {
+        WaitManager.waitUntilJSLoad();
         String color = element.getCssValue("background-Color");
         JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
         if (element instanceof IElement) {
-            js.executeScript("arguments[0].style.backgroundColor = '"+ hightlightColor + "';", ((IElement) element).getWebElement());
+            js.executeScript("arguments[0].style.backgroundColor = '" + hightlightColor + "';", ((IElement) element).getWebElement());
         } else {
             js.executeScript("arguments[0].style.backgroundColor = '" + hightlightColor + "';", element);
         }

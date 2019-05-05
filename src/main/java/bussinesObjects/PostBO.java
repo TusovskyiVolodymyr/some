@@ -20,4 +20,10 @@ public class PostBO extends BaseBO {
         log.info("Liking a post with following text: " + text);
         return this;
     }
+
+    public PostBO ver_postLikedByUser(String userFullName) {
+        postPO.ver_postLiked(userFullName);
+        log.info("Verified liking a post by user : " + userFullName);
+        return this;
+    }
 }

@@ -1,6 +1,5 @@
 import static pageObjects.SearchResultsPO.SearchType;
 
-import annotations.Credentials;
 import annotations.Injector;
 import bussinesObjects.LoginBO;
 import org.testng.Reporter;
@@ -28,11 +27,11 @@ public class SearchTest extends BaseTest {
         FIRST, SECOND, THIRD, ONE, TWO
     }
 
-    @Credentials(creds = {"testLogin1", "testPassword1"})
+//    @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test
     public void test() throws InterruptedException {
         System.out.println(Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getAllParameters().toString());
-        loginBO.logIn(CsvUtils.getParam("testLogin1"),CsvUtils.getParam("testPassword1"));
+        loginBO.act_logIn(CsvUtils.getParam("testLogin1"),CsvUtils.getParam("testPassword1"));
         System.out.println("current thread: " + Thread.currentThread().getName());
 
         searchPO.act_typeSearchWorld("Chandler Bing");
@@ -41,22 +40,22 @@ public class SearchTest extends BaseTest {
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
-    @Credentials(creds = {"testLogin2", "testPassword2"})
+//    @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test()
     public void test3() throws InterruptedException {
         waitForMessage(Events.SECOND);
-        loginBO.logIn(CsvUtils.getParam("testLogin2"),CsvUtils.getParam("testPassword2"));
+        loginBO.act_logIn(CsvUtils.getParam("testLogin2"),CsvUtils.getParam("testPassword2"));
         searchPO.act_typeSearchWorld("Chandler Bing");
 //                .ver_textTyped("Chandler Bing");
         postMessage(Events.THIRD);
     }
 
 
-    @Credentials(creds = {"testLogin1", "testPassword1"})
+//    @Credentials(creds = {"testLogin1", "testPassword1"})
     @Test()
     public void test2() throws InterruptedException {
         waitForMessage(Events.FIRST);
-        loginBO.logIn(CsvUtils.getParam("testLogin1"),CsvUtils.getParam("testPassword1"));
+        loginBO.act_logIn(CsvUtils.getParam("testLogin1"),CsvUtils.getParam("testPassword1"));
         searchPO.act_typeSearchWorld("Chandler Bing");
         postMessage(Events.SECOND);
         postMessage(Events.TWO);
@@ -67,11 +66,11 @@ public class SearchTest extends BaseTest {
         searchResultsPO.act_chooseSearchType(SearchType.PEOPLE);
     }
 
-    @Credentials(creds = {"testLogin2", "testPassword2"})
+//    @Credentials(creds = {"testLogin2", "testPassword2"})
     @Test()
     public void test4() throws InterruptedException {
         waitForMessage(Events.THIRD);
-        loginBO.logIn(CsvUtils.getParam("testLogin2"),CsvUtils.getParam("testPassword2"));
+        loginBO.act_logIn(CsvUtils.getParam("testLogin2"),CsvUtils.getParam("testPassword2"));
         searchPO.act_typeSearchWorld("Ross Geller");
         waitForMessage(Events.TWO);
         System.out.println("Sleeeeping");

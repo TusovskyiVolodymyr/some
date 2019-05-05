@@ -1,11 +1,13 @@
 package utils;
 
-import static utils.JSUtils.highlightElement;
-
+import driver.WebDriverManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import static utils.JSUtils.highlightElement;
 
 public class Verify {
 
@@ -31,6 +33,11 @@ public class Verify {
             throw new AssertionError();
         }
         return isVisible;
+    }
+
+    public static boolean elementVisible(By by) {
+        WebElement webElement = WebDriverManager.getDriver().findElement(by);
+        return elementVisible(webElement);
     }
 
     public static boolean elementNotVisible(WebElement webElement) {

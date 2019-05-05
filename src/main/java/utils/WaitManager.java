@@ -71,7 +71,7 @@ public class WaitManager {
 
     public static void waitUntilJSLoad() {
         Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
-                .withTimeout(Duration.ofSeconds(10))
+                .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
         wait.until((ExpectedCondition<Boolean>) wd ->
