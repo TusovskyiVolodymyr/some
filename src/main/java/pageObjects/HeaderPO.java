@@ -1,12 +1,11 @@
 package pageObjects;
 
-import driver.WebDriverManager;
 import org.openqa.selenium.By;
 import utils.Verify;
 
 public class HeaderPO extends BasePO {
     private enum HeaderPOElements {
-        USER_PROFILE_ICON(By.xpath("//*[contains(@data-click,'profile_icon')]")),
+        USER_PROFILE_ICON(By.xpath("//*[contains(@dataclick,'profile_icon')]")),
         NOTIFICATION_COUNT(By.xpath("//*[contains(@id,'notificationsCountValue')]")),
         BTN_HOME(By.xpath("//*[contains(@data-click,'home_icon')]")),
         BTN_FIND_FRIENDS(By.xpath("//*[contains(@data-click,'home_icon')]")),
@@ -28,7 +27,7 @@ public class HeaderPO extends BasePO {
     }
 
     public HeaderPO act_clickUserProfileIcon() {
-        Verify.elementVisible(WebDriverManager.getDriver().findElement(HeaderPOElements.USER_PROFILE_ICON.get()));
+        Verify.elementVisible(HeaderPOElements.USER_PROFILE_ICON.get());
         click(HeaderPOElements.USER_PROFILE_ICON.get());
         return this;
     }

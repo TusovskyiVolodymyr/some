@@ -19,9 +19,4 @@ public class LoginBO extends BaseBO {
         log.info(String.format("Successfully logged with such credentials: [%s], and [%s]", login, password));
         return this;
     }
-
-    public LoginBO act_getLoginUrl() {
-        loginPO.act_getLoginUrl();
-        return this;
-    }
 }

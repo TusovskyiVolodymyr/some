@@ -10,7 +10,8 @@ public class UserProfilePO extends BasePO {
         BTN_UPLOAD_PHOTO(By.xpath("//*[contains(text(),'Upload Photo')]//parent::div")),
         IPF_FRIEND_SEARCH(By.xpath("//*[@class='inputtext']")),
         DIV_TIMELINE_ITEM(By.xpath("//*[@id='fbTimelineHeadline']//following::*[@data-referrer='timeline_light_nav_top']//a[contains(text(),'%s')]")),
-        DIV_FRIEND_IN_SEARCH(By.xpath("//*[contains(text(),'%s') and @class='name']"));
+        DIV_FRIEND_IN_SEARCH(By.xpath("//*[contains(text(),'%s') and @class='name']")),
+        BTN_SEND_MESSAGE(By.xpath("//*[@id='pagelet_timeline_profile_actions']//*[@role='button' and contains(@href, 'messages/t/')]"));
 
         private By by;
 
@@ -59,6 +60,11 @@ public class UserProfilePO extends BasePO {
 
     public UserProfilePO act_searchFriendByFullName(String fullName) {
         typeText(UserProfileElements.IPF_FRIEND_SEARCH.get(), fullName);
+        return this;
+    }
+
+    public UserProfilePO act_clickSendMessage() {
+        click(UserProfileElements.BTN_SEND_MESSAGE.get());
         return this;
     }
 }

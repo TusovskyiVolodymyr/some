@@ -24,6 +24,7 @@ public class WaitManager {
                 .ignoring(NotFoundException.class)
                 .ignoring(StaleElementReferenceException.class);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        log.info(String.format("Element with locator: %s is present", by.toString()));
     }
 
     public static void waitElementToBePresent(By by) {
@@ -37,23 +38,25 @@ public class WaitManager {
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NotFoundException.class, StaleElementReferenceException.class);
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        log.info(String.format("Element with locator: %s is visible", by.toString()));
     }
 
     public static void waitElementToBeVisible(By by) {
         waitElementToBeVisible(by, Constants.BASE_TIMEOUT);
     }
 
-    public static void waitElementToBeNotPresent(By by, int seconds) {
-        log.info(String.format("Waiting for element dissapear with such locator: %s to be present in %d seconds", by.toString(), seconds));
+    public static void waitElementToBeNotVisible(By by, int seconds) {
+        log.info(String.format("Waiting for element disappear with such locator: %s in %d seconds", by.toString(), seconds));
         Wait<WebDriver> wait = new FluentWait<>(WebDriverManager.getDriver())
                 .withTimeout(Duration.ofSeconds(seconds))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NotFoundException.class, StaleElementReferenceException.class);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        log.info(String.format("Element with locator: %s disappear", by.toString()));
     }
 
-    public static void waitElementToBeNotPresent(By by) {
-        waitElementToBeNotPresent(by, Constants.BASE_TIMEOUT);
+    public static void waitElementToBeNotVisible(By by) {
+        waitElementToBeNotVisible(by, Constants.BASE_TIMEOUT);
     }
 
     public static void waitUntilBeClickable(By by, int seconds) {
@@ -63,6 +66,7 @@ public class WaitManager {
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
         wait.until(ExpectedConditions.elementToBeClickable(by));
+        log.info(String.format("Element with locator: %s is clickable ", by.toString()));
     }
 
     public static void waitUntilBeClickable(By by) {
@@ -76,5 +80,46 @@ public class WaitManager {
                 .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
         wait.until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+    }
+
+    public static boolean isElementVisible(By by, int seconds) {
+        boolean isVisible;
+        try {
+            waitElementToBeVisible(by, seconds);
+            isVisible = true;
+        } catch (TimeoutException e) {
+            isVisible = false;
+        }
+        return isVisible;
+    }
+
+    public static boolean isElementVisible(By by) {
+        return isElementVisible(by, Constants.BASE_TIMEOUT);
+    }
+
+    public static boolean isElementPresent(By by, int seconds) {
+        boolean isVisible;
+        try {
+            waitElementToBePresent(by, seconds);
+            isVisible = true;
+        } catch (TimeoutException e) {
+            isVisible = false;
+        }
+        return isVisible;
+    }
+
+    public static boolean isElementPresent(By by) {
+        return isElementPresent(by, Constants.BASE_TIMEOUT);
+    }
+
+    public static boolean isElementInvisible(By by) {
+        boolean isElementInvsisble;
+        try {
+            waitElementToBeNotVisible(by);
+            isElementInvsisble = true;
+        } catch (TimeoutException e) {
+            isElementInvsisble = false;
+        }
+        return isElementInvsisble;
     }
 }

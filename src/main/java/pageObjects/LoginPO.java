@@ -1,8 +1,8 @@
 package pageObjects;
 
+import annotations.Property;
 import driver.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import utils.Verify;
 
 public class LoginPO extends BasePO {
@@ -23,8 +23,11 @@ public class LoginPO extends BasePO {
         }
     }
 
+    @Property("base.url")
+    private String baseUrl;
+
     public LoginPO act_getLoginUrl() {
-        WebDriverManager.getDriver().get(utill.getBaseUrl());
+        WebDriverManager.getDriver().get(baseUrl);
         return this;
     }
 
@@ -45,8 +48,7 @@ public class LoginPO extends BasePO {
 
     public LoginPO ver_Loged(String user) {
         By by = By.xpath("//*[@data-click='profile_icon']//span[contains(text(),'" + user + "')]");
-        WebElement webElement = WebDriverManager.getDriver().findElement(by);
-        Verify.elementVisible(webElement);
+        Verify.elementVisible(by);
         return this;
     }
 }

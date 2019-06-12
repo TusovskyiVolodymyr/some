@@ -16,14 +16,16 @@ public class Instance {
         try {
 //            Class clazz = Class.forName(o.getClass().getName());
 //            ClassLoader classLoader = clazz.getClassLoader();
-            Class clazz = o.getClass();
-            Class clazz2 = clazz.getSuperclass();
-            Field[] fields2 = clazz2.getDeclaredFields();
-            log.debug("Scanning: " + o.getClass().getName());
-            Field[] fields = clazz.getDeclaredFields();
             List<Field> fields1 = new ArrayList<>();
+            Class clazz = o.getClass();
+            Field[] fields = clazz.getDeclaredFields();
             fields1.addAll(Arrays.asList(fields));
-            fields1.addAll(Arrays.asList(fields2));
+            while (!clazz.getSuperclass().getName().equals("java.lang.Object")) {
+                Class superclass = clazz.getSuperclass();
+                fields1.addAll(Arrays.asList(superclass.getDeclaredFields()));
+                clazz = superclass;
+            }
+            log.debug("Scanning: " + o.getClass().getName());
             for (Field field : fields1) {
                 field.setAccessible(true);
                 if (field.isAnnotationPresent(Injector.class)) {

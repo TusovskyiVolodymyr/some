@@ -1,6 +1,7 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import utils.Verify;
 
 public class SearchPO extends HeaderPO {
 
@@ -17,7 +18,13 @@ public class SearchPO extends HeaderPO {
         public By get() {
             return by;
         }
+
     }
+
+    public SearchPO() {
+        super();
+    }
+
 
     public SearchPO act_typeSearchWorld(String text) {
         typeText(SearchElements.IPF_SEARCH.get(), text);
@@ -30,7 +37,7 @@ public class SearchPO extends HeaderPO {
     }
 
     public SearchPO ver_textTyped(String text) {
-//        Verify.isTrue(searchInput.getInputValue().equals(text), "text is typed is search field");
+        Verify.isTrue(getInputValue(SearchElements.IPF_SEARCH.get()).equals(text), String.format("Text [%s] is typed is search field", text));
         return this;
     }
 }

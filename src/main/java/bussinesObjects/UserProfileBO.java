@@ -1,9 +1,9 @@
 package bussinesObjects;
 
+import static pageObjects.UserProfilePO.TimeLineElements;
+
 import annotations.Injector;
 import pageObjects.UserProfilePO;
-
-import static pageObjects.UserProfilePO.TimeLineElements;
 
 public class UserProfileBO extends BaseBO {
 
@@ -15,6 +15,12 @@ public class UserProfileBO extends BaseBO {
                 .act_searchFriendByFullName(fullName)
                 .act_chooseFriendByFullName(fullName);
         log.info(String.format("Clicking on [%s] from friends list", fullName));
+        return this;
+    }
+
+    public UserProfileBO act_clickSendMessage() {
+        userProfilePO.act_clickSendMessage();
+        log.info("Clicked send message button");
         return this;
     }
 }

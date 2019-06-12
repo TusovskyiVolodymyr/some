@@ -9,8 +9,8 @@ public class HeaderBO extends BaseBO {
     private HeaderPO headerPO;
 
     public BaseBO act_clickUserProfileIcon() {
-        log.info("Clicking user profile icon");
         headerPO.act_clickUserProfileIcon();
+        log.info("Clicked user profile icon");
         return this;
     }
 }

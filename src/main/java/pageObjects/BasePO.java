@@ -1,32 +1,22 @@
 package pageObjects;
 
+import annotations.AnnotationProcessor;
 import annotations.Instance;
 import driver.WebDriverManager;
-import elements.CustomFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import utils.JSUtils;
 import utils.LoggerWrapper;
-import utils.PropertiesUtill;
 import utils.WaitManager;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 public abstract class BasePO {
 
     protected LoggerWrapper log = LoggerWrapper.getLogger(this.getClass());
-    protected PropertiesUtill utill;
+
 
     protected BasePO() {
-        PageFactory.initElements(new CustomFieldDecorator(WebDriverManager.getDriver()), this);
-        try {
-            utill = new PropertiesUtill();
-        } catch (IOException e) {
-            log.error(Arrays.toString(e.getStackTrace()));
-        }
+        AnnotationProcessor.proceed(this);
         Instance.create(this);
     }
 
@@ -50,8 +40,17 @@ public abstract class BasePO {
                 log.info(String.format("Typed text on element with locator: [%s], text: [%s] ", by.toString(), text));
                 return;
             } catch (StaleElementReferenceException e) {
-                System.out.println(String.format("Attempt №[%d] to type text failed", i));
+                System.out.println(String.format("Attempt #[%d] to type text failed", i));
             }
         }
+    }
+
+    public String getInputValue(By by) {
+        WaitManager.waitElementToBeVisible(by);
+        WaitManager.waitUntilBeClickable(by);
+        WebElement input = WebDriverManager.getDriver().findElement(by);
+        String inputValue = input.getAttribute("value");
+        log.info(String.format("Getting input value from element with locator: [%s], value: [%s] ", by.toString(), inputValue));
+        return inputValue;
     }
 }
