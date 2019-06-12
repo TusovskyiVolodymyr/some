@@ -1,9 +1,7 @@
-import annotations.Credentials;
-import annotations.Injector;
-import annotations.Instance;
+import annotations.*;
 import bussinesObjects.LoginBO;
+import consts.Constants;
 import driver.WebDriverManager;
-import listener.TestListener;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.testng.ITestResult;
@@ -14,13 +12,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pageObjects.LoginPO;
-import utils.Appender;
 import utils.WebDriverProperties;
 
-import java.io.File;
 import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class BaseTest {
 
@@ -28,23 +24,20 @@ public abstract class BaseTest {
     private LoginBO loginBO;
     @Injector
     private LoginPO loginPO;
+    @Property("user1FullName")
+    protected String string;
 
     private final static Logger log = LogManager.getLogger(BaseTest.class);
     private Set<Enum> set = new HashSet<>();
-    private final static int EVENT_DEAD_LINE = 100;
 
     protected void waitForMessage(Enum message) throws InterruptedException {
         int counter = 0;
-        log.warn("Thread was locked by " + Thread.currentThread().getName());
-        log.warn(String.format("Waiting for event [%s] in [%d] seconds", message.name(), EVENT_DEAD_LINE));
-        while (true) {
-            if (set.contains(message)) {
-                break;
-            }
+        log.warn(String.format("Waiting for event [%s] in [%d] seconds", message.name(), Constants.EVENT_DEAD_LINE));
+        while (!set.contains(message)) {
             Thread.sleep(1000);
             counter++;
             if (counter == 100) {
-                throw new SkipException("TimeOut");
+                throw new SkipException("Time out for publishing event: " + message.name());
             }
         }
         log.warn(String.format("Event [%s] was published in [%d] seconds", message.name(), counter));
@@ -54,18 +47,20 @@ public abstract class BaseTest {
     protected void postMessage(Enum message) {
         set.add(message);
         log.warn(String.format("Posted event: [%s]", message.name()));
-        log.warn("Swt" + set.toString());
-        log.warn("Thread was unlocked by " + Thread.currentThread().getName());
     }
 
     @Parameters(value = "browser")
-    @BeforeMethod
+    @BeforeMethod()
     public void setup(Method method, @Optional String browserType) {
-//       new File(method.getName() + method.getDeclaringClass().getName());
+        List<String> strings = new ArrayList<>();
         Instance.create(this);
-        String s = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("ieMethod");
-        if (method.getName().equals(s)) {
-            WebDriverManager.setDriver("ie");
+        AnnotationProcessor.proceed(this);
+        String s = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("firefoxMethod");
+        if (s != null && s.contains(",")) {
+            strings = Arrays.stream(s.split(",")).map(String::trim).collect(Collectors.toList());
+        }
+        if (strings.contains(method.getName())) {
+            WebDriverManager.setDriver("firefox");
         } else {
             WebDriverManager.setDriver(browserType);
         }
@@ -77,7 +72,6 @@ public abstract class BaseTest {
         log.error("Calling driver.quit...");
         WebDriverManager.remove();
         log.error("Driver has been stop");
-//        TestListener.sortLogFiles(iTestResult);
     }
 
     private void proceed(Method method) {
@@ -92,6 +86,4 @@ public abstract class BaseTest {
             }
         }
     }
-
-
 }
