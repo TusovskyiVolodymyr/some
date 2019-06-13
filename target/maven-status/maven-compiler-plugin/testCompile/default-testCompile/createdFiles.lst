@@ -1,7 +1,7 @@
 other\Person.class
 classCastCheck\Y.class
 trying\F.class
-LoggingTest.class
+MessageTest.class
 classCastCheck\A.class
 PostLikeTest.class
 trying\ClassCastCheck.class
@@ -10,7 +10,6 @@ trying\A.class
 trying\NewMain.class
 typesTrain\Inter2.class
 Main.class
-WebTest.class
 other\Other.class
 typesTrain\Inter.class
 classCastCheck\Interface1.class
@@ -20,10 +19,12 @@ classCastCheck\Super.class
 classCastCheck\Z.class
 trying\T.class
 classCastCheck\Main.class
+Appium.class
 trying\Main.class
 typesTrain\AbstractBar.class
 PostLikeTest$Events.class
 classCastCheck\X.class
+MessageTest$Events.class
 trying\G.class
 trying\Inter.class
 Remote.class

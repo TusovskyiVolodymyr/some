@@ -24,6 +24,8 @@ public abstract class BaseTest {
     private LoginBO loginBO;
     @Injector
     private LoginPO loginPO;
+    @Injector
+    private bussinesObjects.androidBussinesObjects.LoginBO androidLoginBo;
     @Property("user1FullName")
     protected String string;
 
@@ -36,7 +38,7 @@ public abstract class BaseTest {
         while (!set.contains(message)) {
             Thread.sleep(1000);
             counter++;
-            if (counter == 100) {
+            if (counter == Constants.EVENT_DEAD_LINE) {
                 throw new SkipException("Time out for publishing event: " + message.name());
             }
         }
@@ -56,11 +58,14 @@ public abstract class BaseTest {
         Instance.create(this);
         AnnotationProcessor.proceed(this);
         String s = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("firefoxMethod");
+        String s2 = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("appiumMethod");
         if (s != null && s.contains(",")) {
             strings = Arrays.stream(s.split(",")).map(String::trim).collect(Collectors.toList());
         }
         if (strings.contains(method.getName())) {
             WebDriverManager.setDriver("firefox");
+        } else if (method.getName().equals(s2)) {
+            WebDriverManager.setDriver("appium");
         } else {
             WebDriverManager.setDriver(browserType);
         }
@@ -75,14 +80,23 @@ public abstract class BaseTest {
     }
 
     private void proceed(Method method) {
+        boolean isAppiumMethod = method.getName().equals(Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("appiumMethod"));
         if (method.isAnnotationPresent(Credentials.class)) {
             boolean initialState = method.getAnnotation(Credentials.class).initialState();
             if (initialState) {
-                loginPO.act_getLoginUrl();
+                if (isAppiumMethod) {
+                    log.info("Initial state is true, no login is required");
+                } else {
+                    loginPO.act_getLoginUrl();
+                }
             } else {
                 String[] strings = method.getAnnotation(Credentials.class).creds();
                 if (strings.length != 2) throw new RuntimeException("Invalid credentials");
-                loginBO.act_logIn(WebDriverProperties.getProperty(strings[0]), WebDriverProperties.getProperty(strings[1]));
+                if (isAppiumMethod) {
+                    androidLoginBo.act_logIn(WebDriverProperties.getProperty(strings[0]), WebDriverProperties.getProperty(strings[1]));
+                } else {
+                    loginBO.act_logIn(WebDriverProperties.getProperty(strings[0]), WebDriverProperties.getProperty(strings[1]));
+                }
             }
         }
     }

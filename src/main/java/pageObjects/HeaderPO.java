@@ -5,7 +5,7 @@ import utils.Verify;
 
 public class HeaderPO extends BasePO {
     private enum HeaderPOElements {
-        USER_PROFILE_ICON(By.xpath("//*[contains(@dataclick,'profile_icon')]")),
+        USER_PROFILE_ICON(By.xpath("//*[contains(@data-click,'profile_icon')]")),
         NOTIFICATION_COUNT(By.xpath("//*[contains(@id,'notificationsCountValue')]")),
         BTN_HOME(By.xpath("//*[contains(@data-click,'home_icon')]")),
         BTN_FIND_FRIENDS(By.xpath("//*[contains(@data-click,'home_icon')]")),
